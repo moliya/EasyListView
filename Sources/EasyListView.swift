@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class EasyListViewCoordinator {
+open class EasyListViewCoordinator {
     
-    struct Element {
+    public struct Element {
         var view: UIView
         var identifier: String?
         var deleting: Bool = false
@@ -29,7 +29,7 @@ public class EasyListViewCoordinator {
     fileprivate var elements = [Element]()
     fileprivate var onBatchUpdate = false
     
-    init(with scrollView: UIScrollView) {
+    public init(with scrollView: UIScrollView) {
         self.scrollView = scrollView
     }
 }
