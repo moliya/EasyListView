@@ -424,6 +424,17 @@ public extension EasyListExtension where Base: UIScrollView {
         }
     }
     
+    /**
+    删除所有视图元素
+     
+    */
+    func deleteAll() {
+        coordinator.elements.forEach {
+            $0.view.removeFromSuperview()
+        }
+        coordinator.elements.removeAll()
+    }
+    
     // MARK: - Getter
     /**
     获取视图元素
