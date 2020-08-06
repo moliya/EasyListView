@@ -18,6 +18,7 @@ open class EasyListViewCoordinator {
     }
     
     weak private(set) var scrollView: UIScrollView?
+    private(set) var reusable: EasyListReusable
     
     //全局内边距
     public var globalEdgeInsets: UIEdgeInsets = .zero
@@ -31,6 +32,7 @@ open class EasyListViewCoordinator {
     
     public init(with scrollView: UIScrollView) {
         self.scrollView = scrollView
+        self.reusable = EasyListReusable(with: scrollView)
     }
 }
 
@@ -237,7 +239,7 @@ public extension EasyListExtension where Base: UIScrollView {
             //删除height约束
             contentView.constraints.first { $0.firstAttribute == .height }?.isActive = false
             //添加bottom约束
-            self.addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
+            addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
         }
         
         //添加元素
@@ -349,7 +351,7 @@ public extension EasyListExtension where Base: UIScrollView {
             //删除height约束
             contentView.constraints.first { $0.firstAttribute == .height }?.isActive = false
             //添加bottom约束
-            self.addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
+            addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
         }
         
         //添加元素
@@ -511,11 +513,11 @@ public extension EasyListExtension where Base: UIScrollView {
                     continue
                 }
                 if previousView == scrollView {
-                    self.addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .top, constant: remainSpacing)
+                    addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .top, constant: remainSpacing)
                 } else if nextView == scrollView {
-                    self.addConstraint(for: scrollView, item1: nextView, attr1: .bottom, item2: previousView, attr2: .bottom, constant: remainSpacing)
+                    addConstraint(for: scrollView, item1: nextView, attr1: .bottom, item2: previousView, attr2: .bottom, constant: remainSpacing)
                 } else {
-                    self.addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .bottom, constant: remainSpacing)
+                    addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .bottom, constant: remainSpacing)
                 }
             }
         }
@@ -535,26 +537,5 @@ public extension EasyListExtension where Base: UIScrollView {
             }
         }
     }
-    
-    // 添加约束
-    @discardableResult
-    private func addConstraint(for view: UIView,
-                               item1: AnyObject,
-                               attr1: NSLayoutConstraint.Attribute,
-                               item2: AnyObject? = nil,
-                               attr2: NSLayoutConstraint.Attribute? = nil,
-                               constant: CGFloat = 0) -> NSLayoutConstraint {
-        let c = NSLayoutConstraint(
-            item: item1,
-            attribute: attr1,
-            relatedBy: .equal,
-            toItem: item2,
-            attribute: ((attr2 == nil) ? attr1 : attr2! ),
-            multiplier: 1,
-            constant: constant
-        )
-        c.priority = UILayoutPriority(rawValue: UILayoutPriority.defaultHigh.rawValue + 1)
-        view.addConstraint(c)
-        return c
-    }
+
 }

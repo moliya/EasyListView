@@ -15,6 +15,8 @@
 		171D6EAA24922D12001FF205 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171D6EA824922D12001FF205 /* LaunchScreen.storyboard */; };
 		171D6EB724922EAF001FF205 /* EasyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6EB624922EAF001FF205 /* EasyListView.swift */; };
 		171D6EB924922F28001FF205 /* EasyListCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6EB824922F28001FF205 /* EasyListCompatible.swift */; };
+		177AFA9F24DC2216004A9E92 /* EasyListConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */; };
+		177AFAA124DC227F004A9E92 /* EasyListReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AFAA024DC227E004A9E92 /* EasyListReusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		171D6EAB24922D12001FF205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		171D6EB624922EAF001FF205 /* EasyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListView.swift; path = Sources/EasyListView.swift; sourceTree = SOURCE_ROOT; };
 		171D6EB824922F28001FF205 /* EasyListCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListCompatible.swift; path = Sources/EasyListCompatible.swift; sourceTree = SOURCE_ROOT; };
+		177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListConstraint.swift; path = Sources/EasyListConstraint.swift; sourceTree = SOURCE_ROOT; };
+		177AFAA024DC227E004A9E92 /* EasyListReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListReusable.swift; path = Sources/EasyListReusable.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 			children = (
 				171D6EB624922EAF001FF205 /* EasyListView.swift */,
 				171D6EB824922F28001FF205 /* EasyListCompatible.swift */,
+				177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */,
+				177AFAA024DC227E004A9E92 /* EasyListReusable.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -153,6 +159,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				171D6EB924922F28001FF205 /* EasyListCompatible.swift in Sources */,
+				177AFAA124DC227F004A9E92 /* EasyListReusable.swift in Sources */,
+				177AFA9F24DC2216004A9E92 /* EasyListConstraint.swift in Sources */,
 				171D6EA224922D0E001FF205 /* ViewController.swift in Sources */,
 				171D6E9E24922D0E001FF205 /* AppDelegate.swift in Sources */,
 				171D6EB724922EAF001FF205 /* EasyListView.swift in Sources */,
