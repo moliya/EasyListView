@@ -17,8 +17,8 @@ open class EasyListViewCoordinator {
         var remainSpacing: CGFloat = 0
     }
     
-    weak private(set) var scrollView: UIScrollView?
-    private(set) var reusable: EasyListReusable
+    public weak private(set) var scrollView: UIScrollView?
+    public private(set) var reusable: EasyListReusable
     
     //全局内边距
     public var globalEdgeInsets: UIEdgeInsets = .zero
