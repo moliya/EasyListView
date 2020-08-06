@@ -79,4 +79,7 @@ public extension EasyListExtension where Base: UIScrollView {
         return contentView
     }
     
+    func updateContentOffset() {
+        coordinator.reusable.updateContentOffset()
+    }
 }
