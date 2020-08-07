@@ -100,7 +100,7 @@ public extension EasyListExtension where Base: UIScrollView {
         return contentView
     }
     
-    func updateContentOffset() {
+    func triggerReusable() {
         coordinator.reusable.triggerReusable()
     }
 }
