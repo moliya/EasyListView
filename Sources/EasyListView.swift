@@ -28,6 +28,7 @@ open class EasyListViewCoordinator {
     public var animationDuration: TimeInterval = 0.3
     
     fileprivate var elements = [Element]()
+    fileprivate let cells = NSHashTable<UITableViewCell>.weakObjects()
     fileprivate var onBatchUpdate = false
     
     public init(with scrollView: UIScrollView) {
@@ -123,8 +124,13 @@ public extension EasyListExtension where Base: UIScrollView {
         //添加子视图
         let contentView = UIView()
         contentView.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        var view = view
+        if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
+            view = cell.contentView
+            coordinator.cells.add(cell)
+        }
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(view)
         addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
@@ -211,8 +217,13 @@ public extension EasyListExtension where Base: UIScrollView {
         //插入子视图
         let contentView = UIView()
         contentView.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        var view = view
+        if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
+            view = cell.contentView
+            coordinator.cells.add(cell)
+        }
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(view)
         addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
@@ -323,8 +334,13 @@ public extension EasyListExtension where Base: UIScrollView {
         //插入子视图
         let contentView = UIView()
         contentView.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        var view = view
+        if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
+            view = cell.contentView
+            coordinator.cells.add(cell)
+        }
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(view)
         addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
@@ -446,7 +462,13 @@ public extension EasyListExtension where Base: UIScrollView {
     * returns: 找到的视图
     */
     func getElement(identifier: String) -> UIView? {
-        return coordinator.elements.first { $0.identifier == identifier }?.view.subviews.first
+        let view = coordinator.elements.first { $0.identifier == identifier }?.view.subviews.first
+        for cell in coordinator.cells.allObjects {
+            if cell.contentView == view {
+                return cell
+            }
+        }
+        return view
     }
     
     // MARK: - Private

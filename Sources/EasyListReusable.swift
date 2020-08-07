@@ -17,12 +17,13 @@ open class EasyListReusable {
     
     weak private(set) var scrollView: UIScrollView?
     fileprivate var elements = [Element]()
+    fileprivate let cells = NSHashTable<UITableViewCell>.weakObjects()
     
     public init(with scrollView: UIScrollView) {
         self.scrollView = scrollView
     }
     
-    public func updateContentOffset() {
+    public func triggerReusable() {
         guard let scrollView = scrollView else { return }
         
         let offset = scrollView.contentOffset.y
@@ -37,7 +38,11 @@ open class EasyListReusable {
                 //在可视范围内
                 if contentView.subviews.count == 0 {
                     //恢复子视图
-                    let view = element.maker()
+                    var view = element.maker()
+                    if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
+                        view = cell.contentView
+                        cells.add(cell)
+                    }
                     view.translatesAutoresizingMaskIntoConstraints = false
                     
                     contentView.addSubview(view)
@@ -62,11 +67,27 @@ open class EasyListReusable {
 
 public extension EasyListExtension where Base: UIScrollView {
     
+    var visibleElements: [UIView] {
+        return coordinator.reusable.elements.compactMap {
+            let view = $0.view.subviews.first
+            for cell in coordinator.reusable.cells.allObjects {
+                if cell.contentView == view {
+                    return cell
+                }
+            }
+            return view
+        }
+    }
+    
     func reusableView(with maker: @escaping () -> UIView) -> UIView {
         let contentView = UIView()
-        let view = maker()
-        view.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        var view = maker()
+        if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
+            view = cell.contentView
+            coordinator.reusable.cells.add(cell)
+        }
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(view)
         addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
@@ -80,6 +101,6 @@ public extension EasyListExtension where Base: UIScrollView {
     }
     
     func updateContentOffset() {
-        coordinator.reusable.updateContentOffset()
+        coordinator.reusable.triggerReusable()
     }
 }
