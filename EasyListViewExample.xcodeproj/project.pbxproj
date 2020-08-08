@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		171D6E9E24922D0E001FF205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6E9D24922D0E001FF205 /* AppDelegate.swift */; };
-		171D6EA024922D0E001FF205 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6E9F24922D0E001FF205 /* SceneDelegate.swift */; };
 		171D6EA224922D0E001FF205 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6EA124922D0E001FF205 /* ViewController.swift */; };
 		171D6EA524922D0E001FF205 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171D6EA324922D0E001FF205 /* Main.storyboard */; };
 		171D6EA724922D12001FF205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 171D6EA624922D12001FF205 /* Assets.xcassets */; };
 		171D6EAA24922D12001FF205 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171D6EA824922D12001FF205 /* LaunchScreen.storyboard */; };
 		171D6EB724922EAF001FF205 /* EasyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6EB624922EAF001FF205 /* EasyListView.swift */; };
 		171D6EB924922F28001FF205 /* EasyListCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6EB824922F28001FF205 /* EasyListCompatible.swift */; };
+		176D9E8624DE728A004972E9 /* EasyListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176D9E8524DE728A004972E9 /* EasyListCoordinator.swift */; };
+		176D9E8824DE731C004972E9 /* EasyListExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176D9E8724DE731C004972E9 /* EasyListExtension.swift */; };
+		176D9E8C24DE86A8004972E9 /* ObjcViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176D9E8B24DE86A8004972E9 /* ObjcViewController.m */; };
 		177AFA9F24DC2216004A9E92 /* EasyListConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */; };
-		177AFAA124DC227F004A9E92 /* EasyListReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AFAA024DC227E004A9E92 /* EasyListReusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		171D6E9A24922D0E001FF205 /* EasyListViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyListViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		171D6E9D24922D0E001FF205 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		171D6E9F24922D0E001FF205 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		171D6EA124922D0E001FF205 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		171D6EA424922D0E001FF205 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		171D6EA624922D12001FF205 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -30,8 +30,12 @@
 		171D6EAB24922D12001FF205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		171D6EB624922EAF001FF205 /* EasyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListView.swift; path = Sources/EasyListView.swift; sourceTree = SOURCE_ROOT; };
 		171D6EB824922F28001FF205 /* EasyListCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListCompatible.swift; path = Sources/EasyListCompatible.swift; sourceTree = SOURCE_ROOT; };
+		176D9E8524DE728A004972E9 /* EasyListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListCoordinator.swift; path = Sources/EasyListCoordinator.swift; sourceTree = SOURCE_ROOT; };
+		176D9E8724DE731C004972E9 /* EasyListExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListExtension.swift; path = Sources/EasyListExtension.swift; sourceTree = SOURCE_ROOT; };
+		176D9E8924DE86A8004972E9 /* EasyListViewExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyListViewExample-Bridging-Header.h"; sourceTree = "<group>"; };
+		176D9E8A24DE86A8004972E9 /* ObjcViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcViewController.h; sourceTree = "<group>"; };
+		176D9E8B24DE86A8004972E9 /* ObjcViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcViewController.m; sourceTree = "<group>"; };
 		177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListConstraint.swift; path = Sources/EasyListConstraint.swift; sourceTree = SOURCE_ROOT; };
-		177AFAA024DC227E004A9E92 /* EasyListReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListReusable.swift; path = Sources/EasyListReusable.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,12 +70,14 @@
 			children = (
 				171D6EB224922E5C001FF205 /* Sources */,
 				171D6E9D24922D0E001FF205 /* AppDelegate.swift */,
-				171D6E9F24922D0E001FF205 /* SceneDelegate.swift */,
 				171D6EA124922D0E001FF205 /* ViewController.swift */,
+				176D9E8A24DE86A8004972E9 /* ObjcViewController.h */,
+				176D9E8B24DE86A8004972E9 /* ObjcViewController.m */,
 				171D6EA324922D0E001FF205 /* Main.storyboard */,
 				171D6EA624922D12001FF205 /* Assets.xcassets */,
 				171D6EA824922D12001FF205 /* LaunchScreen.storyboard */,
 				171D6EAB24922D12001FF205 /* Info.plist */,
+				176D9E8924DE86A8004972E9 /* EasyListViewExample-Bridging-Header.h */,
 			);
 			path = EasyListViewExample;
 			sourceTree = "<group>";
@@ -82,7 +88,8 @@
 				171D6EB624922EAF001FF205 /* EasyListView.swift */,
 				171D6EB824922F28001FF205 /* EasyListCompatible.swift */,
 				177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */,
-				177AFAA024DC227E004A9E92 /* EasyListReusable.swift */,
+				176D9E8524DE728A004972E9 /* EasyListCoordinator.swift */,
+				176D9E8724DE731C004972E9 /* EasyListExtension.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -119,6 +126,7 @@
 				TargetAttributes = {
 					171D6E9924922D0E001FF205 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
@@ -159,12 +167,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				171D6EB924922F28001FF205 /* EasyListCompatible.swift in Sources */,
-				177AFAA124DC227F004A9E92 /* EasyListReusable.swift in Sources */,
+				176D9E8824DE731C004972E9 /* EasyListExtension.swift in Sources */,
 				177AFA9F24DC2216004A9E92 /* EasyListConstraint.swift in Sources */,
+				176D9E8C24DE86A8004972E9 /* ObjcViewController.m in Sources */,
 				171D6EA224922D0E001FF205 /* ViewController.swift in Sources */,
 				171D6E9E24922D0E001FF205 /* AppDelegate.swift in Sources */,
+				176D9E8624DE728A004972E9 /* EasyListCoordinator.swift in Sources */,
 				171D6EB724922EAF001FF205 /* EasyListView.swift in Sources */,
-				171D6EA024922D0E001FF205 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,14 +317,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EasyListViewExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.carefree.EasyListViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EasyListViewExample/EasyListViewExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -325,14 +338,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EasyListViewExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.carefree.EasyListViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EasyListViewExample/EasyListViewExample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
