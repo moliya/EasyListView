@@ -423,6 +423,7 @@ public extension EasyListExtension where Base: UIScrollView {
             $0.view.removeFromSuperview()
         }
         coordinator.elements.removeAll()
+        coordinator.reusableElements.removeAll()
     }
     
     // MARK: - Reusable
@@ -625,7 +626,7 @@ public extension EasyListExtension where Base: UIScrollView {
 }
 
 
-// MARK: - Objc
+// MARK: - Objective-C
 public extension UIScrollView {
     
     // MARK: - Coordinator
