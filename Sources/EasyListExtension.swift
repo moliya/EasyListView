@@ -139,30 +139,32 @@ public extension EasyListExtension where Base: UIScrollView {
         let duration = coordinator.animationDuration
         let elements = coordinator.elements
         
-        var relateIdentifier: String?
-        if let string = element as? String  {
-            relateIdentifier = elements.first { $0.identifier == string }?.identifier
+        var relateView: UIView?
+        if let string = element as? String {
+            relateView = elements.first { $0.identifier == string }?.view
         }
-        if let view = element as? UIView {
+        if let cell = element as? UITableViewCell {
+            relateView = coordinator.cells.allObjects.first { $0 == cell }?.contentView.superview
+        } else if let view = element as? UIView {
             if view == scrollView {
-                relateIdentifier = "super"
+                relateView = view
             } else {
-                relateIdentifier = elements.first { $0.view == view }?.identifier
+                relateView = elements.first { $0.view == view }?.view
             }
         }
-        assert(relateIdentifier != nil, "invalid element")
+        assert(relateView != nil, "invalid element")
         
         var previousView: UIView?
         var nextView: UIView = scrollView
         var flag = false
         var index = -1
-        if relateIdentifier == "super" {
+        if relateView == scrollView {
             previousView = scrollView
             flag = true
             index = 0
         }
         for i in 0 ..< elements.count {
-            if elements[i].identifier == relateIdentifier {
+            if elements[i].view == relateView {
                 previousView = elements[i].view
                 flag = true
                 index = i + 1
@@ -256,30 +258,32 @@ public extension EasyListExtension where Base: UIScrollView {
         let duration = coordinator.animationDuration
         let elements = coordinator.elements
         
-        var relateIdentifier: String?
-        if let string = element as? String  {
-            relateIdentifier = elements.first { $0.identifier == string }?.identifier
+        var relateView: UIView?
+        if let string = element as? String {
+            relateView = elements.first { $0.identifier == string }?.view
         }
-        if let view = element as? UIView {
+        if let cell = element as? UITableViewCell {
+            relateView = coordinator.cells.allObjects.first { $0 == cell }?.contentView.superview
+        } else if let view = element as? UIView {
             if view == scrollView {
-                relateIdentifier = "super"
+                relateView = view
             } else {
-                relateIdentifier = elements.first { $0.view == view }?.identifier
+                relateView = elements.first { $0.view == view }?.view
             }
         }
-        assert(relateIdentifier != nil, "invalid element")
+        assert(relateView != nil, "invalid element")
         
         var previousView: UIView = scrollView
         var nextView: UIView?
         var flag = false
         var index = -1
-        if relateIdentifier == "super" {
+        if relateView == scrollView {
             nextView = scrollView
             flag = true
             index = elements.count
         }
         for i in (0 ..< elements.count).reversed() {
-            if elements[i].identifier == relateIdentifier {
+            if elements[i].view == relateView {
                 nextView = elements[i].view
                 flag = true
                 index = i
@@ -370,17 +374,19 @@ public extension EasyListExtension where Base: UIScrollView {
     func delete(_ element: Any, remainSpacing spacing: CGFloat = 0, completion: (() -> Void)? = nil) {
         let elements = coordinator.elements
         
-        var identifier: String?
-        if let string = element as? String  {
-            identifier = elements.first { $0.identifier == string }?.identifier
+        var targetView: UIView?
+        if let string = element as? String {
+            targetView = elements.first { $0.identifier == string }?.view
         }
-        if let view = element as? UIView {
-            identifier = elements.first { $0.view == view }?.identifier
+        if let cell = element as? UITableViewCell {
+            targetView = coordinator.cells.allObjects.first { $0 == cell }?.contentView.superview
+        } else if let view = element as? UIView {
+            targetView = elements.first { $0.view == view }?.view
         }
-        assert(identifier != nil, "invalid element")
+        assert(targetView != nil, "invalid element")
         
         for i in 0 ..< coordinator.elements.count {
-            if identifier == coordinator.elements[i].identifier {
+            if targetView == coordinator.elements[i].view {
                 if !coordinator.elements[i].deleting {
                     coordinator.elements[i].deleting = true
                     coordinator.elements[i].remainSpacing = spacing
