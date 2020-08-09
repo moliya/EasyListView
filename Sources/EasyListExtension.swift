@@ -144,7 +144,7 @@ public extension EasyListExtension where Base: UIScrollView {
             relateView = elements.first { $0.identifier == string }?.view
         }
         if let cell = element as? UITableViewCell {
-            relateView = coordinator.cells.allObjects.first { $0 == cell }?.contentView.superview
+            relateView = coordinator.cells.first { $0 == cell }?.contentView.superview
         } else if let view = element as? UIView {
             if view == scrollView {
                 relateView = view
@@ -263,7 +263,7 @@ public extension EasyListExtension where Base: UIScrollView {
             relateView = elements.first { $0.identifier == string }?.view
         }
         if let cell = element as? UITableViewCell {
-            relateView = coordinator.cells.allObjects.first { $0 == cell }?.contentView.superview
+            relateView = coordinator.cells.first { $0 == cell }?.contentView.superview
         } else if let view = element as? UIView {
             if view == scrollView {
                 relateView = view
@@ -379,7 +379,7 @@ public extension EasyListExtension where Base: UIScrollView {
             targetView = elements.first { $0.identifier == string }?.view
         }
         if let cell = element as? UITableViewCell {
-            targetView = coordinator.cells.allObjects.first { $0 == cell }?.contentView.superview
+            targetView = coordinator.cells.first { $0 == cell }?.contentView.superview
         } else if let view = element as? UIView {
             targetView = elements.first { $0.view == view }?.view
         }
@@ -441,7 +441,7 @@ public extension EasyListExtension where Base: UIScrollView {
     var visibleReusableElements: [UIView] {
         return coordinator.reusableElements.compactMap {
             let view = $0.view.subviews.first
-            for cell in coordinator.cells.allObjects {
+            for cell in coordinator.cells {
                 if cell.contentView == view {
                     return cell
                 }
@@ -533,7 +533,7 @@ public extension EasyListExtension where Base: UIScrollView {
     */
     func getElement(identifier: String) -> UIView? {
         let view = coordinator.elements.first { $0.identifier == identifier }?.view.subviews.first
-        for cell in coordinator.cells.allObjects {
+        for cell in coordinator.cells {
             if cell.contentView == view {
                 return cell
             }
