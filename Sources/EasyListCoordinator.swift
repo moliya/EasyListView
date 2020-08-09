@@ -30,7 +30,7 @@ open class EasyListCoordinator: NSObject {
     
     internal var elements = [Element]()
     internal var reusableElements = [Element]()
-    internal let cells = NSHashTable<UITableViewCell>.weakObjects()
+    internal var cells = [UITableViewCell]()
     internal var onBatchUpdate = false
     
     @objc(initWithScrollView:)

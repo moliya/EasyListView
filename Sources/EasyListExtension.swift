@@ -100,7 +100,7 @@ public extension EasyListExtension where Base: UIScrollView {
         var view = view
         if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
             view = cell.contentView
-            coordinator.cells.add(cell)
+            coordinator.cells.append(cell)
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -195,7 +195,7 @@ public extension EasyListExtension where Base: UIScrollView {
         var view = view
         if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
             view = cell.contentView
-            coordinator.cells.add(cell)
+            coordinator.cells.append(cell)
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -314,7 +314,7 @@ public extension EasyListExtension where Base: UIScrollView {
         var view = view
         if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
             view = cell.contentView
-            coordinator.cells.add(cell)
+            coordinator.cells.append(cell)
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -463,7 +463,7 @@ public extension EasyListExtension where Base: UIScrollView {
         var view = maker()
         if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
             view = cell.contentView
-            coordinator.cells.add(cell)
+            coordinator.cells.append(cell)
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -500,7 +500,7 @@ public extension EasyListExtension where Base: UIScrollView {
                     var view = maker()
                     if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
                         view = cell.contentView
-                        coordinator.cells.add(cell)
+                        coordinator.cells.append(cell)
                     }
                     view.translatesAutoresizingMaskIntoConstraints = false
                     
