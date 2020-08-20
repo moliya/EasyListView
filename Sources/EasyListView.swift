@@ -32,7 +32,13 @@ open class EasyListView: UIScrollView {
     // MARK: - Private
     private func commonInit() {
         observation = self.observe(\.contentOffset, options: [.initial, .new]) {[weak self] _, _ in
-            self?.easy.triggerReusable()
+            self?.easy.triggerDisposable()
         }
     }
+}
+
+internal class EasyListContentView: UIView {
+    
+    var disposableMaker: (() -> UIView)? = nil
+    
 }

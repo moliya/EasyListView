@@ -12,11 +12,10 @@ import UIKit
 open class EasyListCoordinator: NSObject {
     
     internal struct Element {
-        var view: UIView
+        var view: EasyListContentView
         var identifier: String?
         var deleting: Bool = false
         var remainSpacing: CGFloat = 0
-        var maker: (() -> UIView)? = nil
     }
     
     public weak private(set) var scrollView: UIScrollView?
@@ -29,8 +28,8 @@ open class EasyListCoordinator: NSObject {
     public var animationDuration: TimeInterval = 0.3
     
     internal var elements = [Element]()
-    internal var reusableElements = [Element]()
-    internal var cells = [UITableViewCell]()
+    internal var disposableElements = [Element]()
+    internal var cells = [EasyListContentView: UITableViewCell]()
     internal var onBatchUpdate = false
     
     @objc(initWithScrollView:)

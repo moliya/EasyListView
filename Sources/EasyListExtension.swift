@@ -94,23 +94,36 @@ public extension EasyListExtension where Base: UIScrollView {
             }
         }
         //添加子视图
-        let contentView = UIView()
-        contentView.clipsToBounds = true
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        var view = view
-        if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
-            view = cell.contentView
-            coordinator.cells.append(cell)
+        var contentView: EasyListContentView
+        if let disposableView = view as? EasyListContentView {
+            //动态元素
+            contentView = disposableView
+            coordinator.disposableElements.append(EasyListCoordinator.Element(view: contentView))
+        } else {
+            //静态元素
+            contentView = EasyListContentView()
+            
+            var view = view
+            if let cell = view as? UITableViewCell {
+                view = cell.contentView
+                coordinator.cells[contentView] = cell
+            } else {
+                view.translatesAutoresizingMaskIntoConstraints = false
+            }
+            contentView.addSubview(view)
         }
-        view.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(view)
+        guard let view = contentView.subviews.first else { return }
+        
         addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
         addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing)
         addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top)
         addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
         
+        contentView.clipsToBounds = true
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
+        
         addConstraint(for: scrollView, item1: scrollView, attr1: .width, item2: contentView, attr2: .width, constant: insets.left + insets.right)
         addConstraint(for: scrollView, item1: contentView, attr1: .leading, item2: scrollView, attr2: .leading, constant: insets.left)
         addConstraint(for: scrollView, item1: contentView, attr1: .trailing, item2: scrollView, attr2: .trailing, constant: -insets.right)
@@ -144,7 +157,7 @@ public extension EasyListExtension where Base: UIScrollView {
             relateView = elements.first { $0.identifier == string }?.view
         }
         if let cell = element as? UITableViewCell {
-            relateView = coordinator.cells.first { $0 == cell }?.contentView.superview
+            relateView = coordinator.cells.first { $0.value == cell }?.key
         } else if let view = element as? UIView {
             if view == scrollView {
                 relateView = view
@@ -189,23 +202,37 @@ public extension EasyListExtension where Base: UIScrollView {
             }
         }
         //插入子视图
-        let contentView = UIView()
-        contentView.clipsToBounds = true
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        var view = view
-        if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
-            view = cell.contentView
-            coordinator.cells.append(cell)
+        var contentView: EasyListContentView
+        var isDisposable = false
+        if let disposableView = view as? EasyListContentView {
+            //动态元素
+            contentView = disposableView
+            isDisposable = true
+        } else {
+            //静态元素
+            contentView = EasyListContentView()
+            
+            var view = view
+            if let cell = view as? UITableViewCell {
+                view = cell.contentView
+                coordinator.cells[contentView] = cell
+            } else {
+                view.translatesAutoresizingMaskIntoConstraints = false
+            }
+            contentView.addSubview(view)
         }
-        view.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(view)
+        guard let view = contentView.subviews.first else { return }
+        
         addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
         addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing)
         addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top)
         let heightConstraint = addConstraint(for: contentView, item1: contentView, attr1: .height, item2: nil, attr2: .notAnAttribute)
         
+        contentView.clipsToBounds = true
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
+        
         addConstraint(for: scrollView, item1: scrollView, attr1: .width, item2: contentView, attr2: .width, constant: insets.left + insets.right)
         addConstraint(for: scrollView, item1: contentView, attr1: .leading, item2: scrollView, attr2: .leading, constant: insets.left)
         addConstraint(for: scrollView, item1: contentView, attr1: .trailing, item2: scrollView, attr2: .trailing, constant: -insets.right)
@@ -227,17 +254,28 @@ public extension EasyListExtension where Base: UIScrollView {
             addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
         }
         
-        //添加元素
         coordinator.elements.insert(EasyListCoordinator.Element(view: contentView, identifier: identifier), at: index)
         //更新布局
         UIView.animate(withDuration: duration * 1 / 4, animations: {
             scrollView.layoutIfNeeded()
         }) { _ in
+            if isDisposable {
+                let minY = contentView.frame.minY
+                var index = 0
+                for tmp in self.coordinator.disposableElements {
+                    if tmp.view.frame.minY > minY {
+                        break
+                    }
+                    index += 1
+                }
+                self.coordinator.disposableElements.insert(EasyListCoordinator.Element(view: contentView), at: index)
+            }
             //更新高度约束
             heightConstraint.constant = view.frame.size.height
             UIView.animate(withDuration: duration * 3 / 4, animations: {
                 scrollView.layoutIfNeeded()
             }) { _ in
+                self.reloadDisposableIfNeed()
                 updateClosure()
                 completion?()
             }
@@ -263,7 +301,7 @@ public extension EasyListExtension where Base: UIScrollView {
             relateView = elements.first { $0.identifier == string }?.view
         }
         if let cell = element as? UITableViewCell {
-            relateView = coordinator.cells.first { $0 == cell }?.contentView.superview
+            relateView = coordinator.cells.first { $0.value == cell }?.key
         } else if let view = element as? UIView {
             if view == scrollView {
                 relateView = view
@@ -308,23 +346,37 @@ public extension EasyListExtension where Base: UIScrollView {
             }
         }
         //插入子视图
-        let contentView = UIView()
-        contentView.clipsToBounds = true
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        var view = view
-        if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
-            view = cell.contentView
-            coordinator.cells.append(cell)
+        var contentView: EasyListContentView
+        var isDisposable = false
+        if let disposableView = view as? EasyListContentView {
+            //动态元素
+            contentView = disposableView
+            isDisposable = true
+        } else {
+            //静态元素
+            contentView = EasyListContentView()
+            
+            var view = view
+            if let cell = view as? UITableViewCell {
+                view = cell.contentView
+                coordinator.cells[contentView] = cell
+            } else {
+                view.translatesAutoresizingMaskIntoConstraints = false
+            }
+            contentView.addSubview(view)
         }
-        view.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(view)
+        guard let view = contentView.subviews.first else { return }
+        
         addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
         addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing)
         addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top)
         let heightConstraint = addConstraint(for: contentView, item1: contentView, attr1: .height, item2: nil, attr2: .notAnAttribute)
         
+        contentView.clipsToBounds = true
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
+        
         addConstraint(for: scrollView, item1: scrollView, attr1: .width, item2: contentView, attr2: .width, constant: insets.left + insets.right)
         addConstraint(for: scrollView, item1: contentView, attr1: .leading, item2: scrollView, attr2: .leading, constant: insets.left)
         addConstraint(for: scrollView, item1: contentView, attr1: .trailing, item2: scrollView, attr2: .trailing, constant: -insets.right)
@@ -346,17 +398,28 @@ public extension EasyListExtension where Base: UIScrollView {
             addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
         }
         
-        //添加元素
         coordinator.elements.insert(EasyListCoordinator.Element(view: contentView, identifier: identifier), at: index)
         //更新布局
         UIView.animate(withDuration: duration * 1 / 4, animations: {
             scrollView.layoutIfNeeded()
         }) { _ in
+            if isDisposable {
+                let minY = contentView.frame.minY
+                var index = 0
+                for tmp in self.coordinator.disposableElements {
+                    if tmp.view.frame.minY > minY {
+                        break
+                    }
+                    index += 1
+                }
+                self.coordinator.disposableElements.insert(EasyListCoordinator.Element(view: contentView), at: index)
+            }
             //更新高度约束
             heightConstraint.constant = view.frame.size.height
             UIView.animate(withDuration: duration * 3 / 4, animations: {
                 scrollView.layoutIfNeeded()
             }) { _ in
+                self.reloadDisposableIfNeed()
                 updateClosure()
                 completion?()
             }
@@ -379,7 +442,7 @@ public extension EasyListExtension where Base: UIScrollView {
             targetView = elements.first { $0.identifier == string }?.view
         }
         if let cell = element as? UITableViewCell {
-            targetView = coordinator.cells.first { $0 == cell }?.contentView.superview
+            targetView = coordinator.cells.first { $0.value == cell }?.key
         } else if let view = element as? UIView {
             targetView = elements.first { $0.view == view }?.view
         }
@@ -400,22 +463,7 @@ public extension EasyListExtension where Base: UIScrollView {
         }
         
         applyDeletion {
-            completion?()
-        }
-    }
-    
-    /**
-    批量删除视图元素
-    
-    * parameter deleteClosure: 在该闭包中调用delete方法来标记待删除的视图元素
-    * parameter completion: 删除完成后的回调
-    */
-    func batchDelete(deleteClosure: (UIScrollView) -> Void, completion: (() -> Void)?) {
-        coordinator.onBatchUpdate = true
-        deleteClosure(base)
-        coordinator.onBatchUpdate = false
-        
-        applyDeletion {
+            self.reloadDisposableIfNeed()
             completion?()
         }
     }
@@ -429,80 +477,105 @@ public extension EasyListExtension where Base: UIScrollView {
             $0.view.removeFromSuperview()
         }
         coordinator.elements.removeAll()
-        coordinator.reusableElements.removeAll()
+        coordinator.disposableElements.removeAll()
     }
     
-    // MARK: - Reusable
+    // MARK: - BatchUpdate
     /**
-    获取所以可视元素
-     
-    * returns: 找到的视图集合
+    开始批量更新操作
+    
+    * Note: 需和endUpdates成对使用。批量更新操作包括append(添加)和delete(删除)
     */
-    var visibleReusableElements: [UIView] {
-        return coordinator.reusableElements.compactMap {
-            let view = $0.view.subviews.first
-            for cell in coordinator.cells {
-                if cell.contentView == view {
-                    return cell
-                }
+    func beginUpdates() {
+        coordinator.onBatchUpdate = true
+    }
+    
+    /**
+    完成批量更新操作
+     
+    * parameter completion: 更新完成后的回调
+    */
+    func endUpdates(_ completion: (() -> Void)? = nil) {
+        coordinator.onBatchUpdate = false
+        
+        //是否有删除元素
+        let count = coordinator.elements.filter { $0.deleting }.count
+        if count > 0 {
+            //执行删除操作
+            applyDeletion {
+                self.reloadDisposableIfNeed()
+                completion?()
             }
-            return view
+        } else {
+            //不执行删除操作
+            base.layoutIfNeeded()
+            self.reloadDisposableIfNeed()
+            completion?()
         }
     }
     
+    // MARK: - Disposable
     /**
-    生成重用视图
+    生成自释放元素
     
     * parameter maker: 闭包
      
     * returns: 生成的视图
     */
-    func reusableView(with maker: @escaping () -> UIView) -> UIView {
-        let contentView = UIView()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+    func disposableView(with maker: @escaping () -> UIView) -> UIView {
+        let contentView = EasyListContentView()
         var view = maker()
-        if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
+        if let cell = view as? UITableViewCell {
             view = cell.contentView
-            coordinator.cells.append(cell)
+            coordinator.cells[contentView] = cell
+        } else {
+            view.translatesAutoresizingMaskIntoConstraints = false
         }
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
         contentView.addSubview(view)
-        addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
-        addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing)
-        addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top)
-        addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
-        
-        coordinator.reusableElements.append(EasyListCoordinator.Element(view: contentView, maker: maker))
+        contentView.disposableMaker = maker
         
         return contentView
     }
     
     /**
-    触发重用机制
+    刷新数据
      
     */
-    func triggerReusable() {
+    func reloadDisposableData() {
+        coordinator.disposableElements.forEach {
+            $0.view.subviews.first?.removeFromSuperview()
+        }
+        reloadDisposableIfNeed()
+    }
+    
+    /**
+    触发自释放机制
+     
+    */
+    func triggerDisposable() {
         let scrollView = base
         
         let offset = scrollView.contentOffset.y
         let range = scrollView.frame.height
         let minY = offset - range
         let maxY = offset + range + range
-        coordinator.reusableElements.forEach { element in
+        
+        coordinator.disposableElements.forEach { element in
             let contentView = element.view
-            guard let frame = contentView.superview?.frame, let maker = element.maker else { return }
+            let frame = contentView.frame
+            guard let maker = contentView.disposableMaker else { return }
             
             if frame.maxY >= minY && frame.minY <= maxY {
                 //在可视范围内
                 if contentView.subviews.count == 0 {
                     //恢复子视图
                     var view = maker()
-                    if let cell = view as? UITableViewCell, cell.contentView.subviews.count > 0 {
+                    if let cell = view as? UITableViewCell {
                         view = cell.contentView
-                        coordinator.cells.append(cell)
+                        coordinator.cells[contentView] = cell
+                    } else {
+                        view.translatesAutoresizingMaskIntoConstraints = false
                     }
-                    view.translatesAutoresizingMaskIntoConstraints = false
                     
                     contentView.addSubview(view)
                     addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
@@ -517,6 +590,7 @@ public extension EasyListExtension where Base: UIScrollView {
                 if contentView.subviews.count > 0 {
                     //移除子视图，回收内存
                     addConstraint(for: contentView, item1: contentView, attr1: .height, item2: nil, attr2: .notAnAttribute, constant: frame.height)
+                    coordinator.cells.removeValue(forKey: contentView)
                     contentView.subviews.forEach { $0.removeFromSuperview() }
                 }
             }
@@ -532,13 +606,47 @@ public extension EasyListExtension where Base: UIScrollView {
     * returns: 找到的视图
     */
     func getElement(identifier: String) -> UIView? {
-        let view = coordinator.elements.first { $0.identifier == identifier }?.view.subviews.first
-        for cell in coordinator.cells {
-            if cell.contentView == view {
+        let getView = coordinator.elements.first { $0.identifier == identifier }?.view
+        guard let contentView = getView else {
+            return nil
+        }
+        if let cell = coordinator.cells[contentView] {
+            return cell
+        }
+        return contentView.subviews.first
+    }
+    
+    /**
+    获取指定下标的自释放元素
+    
+    * parameter index: 下标
+     
+    * returns: 找到的视图
+    */
+    func getDisposableElement(at index: Int) -> UIView? {
+        if index >= coordinator.disposableElements.count {
+            return nil
+        }
+        let contentView = coordinator.disposableElements[index].view
+        if let cell = coordinator.cells[contentView] {
+            return cell
+        }
+        return contentView.subviews.first
+    }
+    
+    /**
+    获取所有可视的自释放元素
+     
+    * returns: 找到的视图集合
+    */
+    var visibleDisposableElements: [UIView] {
+        return coordinator.disposableElements.compactMap {
+            let contentView = $0.view
+            if let cell = coordinator.cells[contentView] {
                 return cell
             }
+            return contentView.subviews.first
         }
-        return view
     }
     
     // MARK: - Private
@@ -623,114 +731,18 @@ public extension EasyListExtension where Base: UIScrollView {
                 scrollView.layoutIfNeeded()
             }) { _ in
                 //完成后移除相关元素
-                deletingViews.forEach { $0.removeFromSuperview() }
+                deletingViews.forEach { deleteView in
+                    deleteView.removeFromSuperview()
+                    self.coordinator.cells.removeValue(forKey: deleteView)
+                }
                 self.coordinator.elements.removeAll { $0.deleting }
                 completion?()
             }
         }
     }
-}
-
-
-// MARK: - Objective-C
-public extension UIScrollView {
     
-    // MARK: - Coordinator
-    @objc var easy_coordinator: EasyListCoordinator {
-        get {
-            return easy.coordinator
-        }
-        set {
-            easy.coordinator = newValue
-        }
-    }
-    
-    // MARK: - Append
-    @objc func easy_appendView(_ view: UIView) {
-        easy.append(view)
-    }
-    
-    @objc func easy_appendView(_ view: UIView, spacing: CGFloat) {
-        easy.append(view, spacing: spacing)
-    }
-    
-    @objc func easy_appendView(_ view: UIView, forIdentifier identifier: String, spacing: CGFloat) {
-        easy.append(view, for: identifier, spacing: spacing)
-    }
-    
-    @objc func easy_appendView(_ view: UIView, forIdentifier identifier: String, withInsets insets: UIEdgeInsets) {
-        easy.append(view, with: insets, for: identifier)
-    }
-    
-    // MARK: - Insert
-    @objc func easy_insertView(_ view: UIView, after element: Any) {
-        easy.insert(view, after: element)
-    }
-    
-    @objc func easy_insertView(_ view: UIView, after element: Any, withInsets insets: UIEdgeInsets) {
-        easy.insert(view, after: element, with: insets)
-    }
-    
-    @objc func easy_insertView(_ view: UIView, after element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String) {
-        easy.insert(view, after: element, with: insets, for: identifier)
-    }
-    
-    @objc func easy_insertView(_ view: UIView, after element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String, completion: (() -> Void)?) {
-        easy.insert(view, after: element, with: insets, for: identifier, completion: completion)
-    }
-    
-    @objc func easy_insertView(_ view: UIView, before element: Any) {
-        easy.insert(view, before: element)
-    }
-    
-    @objc func easy_insertView(_ view: UIView, before element: Any, withInsets insets: UIEdgeInsets) {
-        easy.insert(view, before: element, with: insets)
-    }
-    
-    @objc func easy_insertView(_ view: UIView, before element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String) {
-        easy.insert(view, before: element, with: insets, for: identifier)
-    }
-    
-    @objc func easy_insertView(_ view: UIView, before element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String, completion: (() -> Void)?) {
-        easy.insert(view, before: element, with: insets, for: identifier, completion: completion)
-    }
-    
-    // MARK: - Delete
-    @objc func easy_deleteElement(_ element: Any) {
-        easy.delete(element)
-    }
-    
-    @objc func easy_deleteElement(_ element: Any, remainSpacing spacing: CGFloat) {
-        easy.delete(element, remainSpacing: spacing)
-    }
-    
-    @objc func easy_deleteElement(_ element: Any, remainSpacing spacing: CGFloat, completion: (() -> Void)?) {
-        easy.delete(element, remainSpacing: spacing, completion: completion)
-    }
-    
-    @objc func easy_batchDelete(_ deleteClosure: (UIScrollView) -> Void, completion: (() -> Void)?) {
-        easy.batchDelete(deleteClosure: deleteClosure, completion: completion)
-    }
-    
-    @objc func easy_deleteAll() {
-        easy.deleteAll()
-    }
-    
-    // MARK: - Reusable
-    @objc var easy_visibleReusableElements: [UIView] {
-        return easy.visibleReusableElements
-    }
-    
-    @objc func easy_reusableViewWithMaker(_ maker: @escaping () -> UIView) -> UIView {
-        return easy.reusableView(with: maker)
-    }
-    
-    @objc func easy_triggerReusable() {
-        easy.triggerReusable()
-    }
-    
-    // MARK: - Getter
-    @objc func easy_getElement(identifier: String) -> UIView? {
-        return easy.getElement(identifier: identifier)
+    //刷新
+    private func reloadDisposableIfNeed() {
+        triggerDisposable()
     }
 }
