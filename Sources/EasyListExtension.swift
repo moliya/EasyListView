@@ -161,7 +161,7 @@ public extension EasyListExtension where Base: UIScrollView {
             if view == scrollView {
                 relateView = view
             } else {
-                relateView = elements.first { $0.view == view }?.view
+                relateView = elements.first { $0.view == view.superview }?.view
             }
         }
         assert(relateView != nil, "invalid element")
@@ -304,7 +304,7 @@ public extension EasyListExtension where Base: UIScrollView {
             if view == scrollView {
                 relateView = view
             } else {
-                relateView = elements.first { $0.view == view }?.view
+                relateView = elements.first { $0.view == view.superview }?.view
             }
         }
         assert(relateView != nil, "invalid element")
@@ -441,7 +441,7 @@ public extension EasyListExtension where Base: UIScrollView {
         if let cell = element as? UITableViewCell {
             targetView = coordinator.cells.first { $0.value == cell }?.key
         } else if let view = element as? UIView {
-            targetView = elements.first { $0.view == view }?.view
+            targetView = elements.first { $0.view == view.superview }?.view
         }
         assert(targetView != nil, "invalid element")
         
