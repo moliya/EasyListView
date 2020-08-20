@@ -107,9 +107,8 @@ public extension EasyListExtension where Base: UIScrollView {
             if let cell = view as? UITableViewCell {
                 view = cell.contentView
                 coordinator.cells[contentView] = cell
-            } else {
-                view.translatesAutoresizingMaskIntoConstraints = false
             }
+            view.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(view)
         }
         
@@ -216,9 +215,8 @@ public extension EasyListExtension where Base: UIScrollView {
             if let cell = view as? UITableViewCell {
                 view = cell.contentView
                 coordinator.cells[contentView] = cell
-            } else {
-                view.translatesAutoresizingMaskIntoConstraints = false
             }
+            view.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(view)
         }
         
@@ -360,9 +358,8 @@ public extension EasyListExtension where Base: UIScrollView {
             if let cell = view as? UITableViewCell {
                 view = cell.contentView
                 coordinator.cells[contentView] = cell
-            } else {
-                view.translatesAutoresizingMaskIntoConstraints = false
             }
+            view.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(view)
         }
         
@@ -528,9 +525,8 @@ public extension EasyListExtension where Base: UIScrollView {
         if let cell = view as? UITableViewCell {
             view = cell.contentView
             coordinator.cells[contentView] = cell
-        } else {
-            view.translatesAutoresizingMaskIntoConstraints = false
         }
+        view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)
         contentView.disposableMaker = maker
         
@@ -573,10 +569,8 @@ public extension EasyListExtension where Base: UIScrollView {
                     if let cell = view as? UITableViewCell {
                         view = cell.contentView
                         coordinator.cells[contentView] = cell
-                    } else {
-                        view.translatesAutoresizingMaskIntoConstraints = false
                     }
-                    
+                    view.translatesAutoresizingMaskIntoConstraints = false
                     contentView.addSubview(view)
                     addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
                     addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing)
