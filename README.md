@@ -199,9 +199,9 @@ self.scrollView.easy.coordinator.animationDuration = 1
 ```swift
 //Objective-C请调用easy_前缀的方法
 @objc var easy_coordinator: EasyListCoordinator
-@objc func easy_appendView(_ view: UIView)	
-@objc func easy_insertView(_ view: UIView, after element: Any)
-@objc func easy_insertView(_ view: UIView, before element: Any)
+@objc func easy_appendView(_ view: ViewOrClosure)	
+@objc func easy_insertView(_ view: ViewOrClosure, after element: Any)
+@objc func easy_insertView(_ view: ViewOrClosure, before element: Any)
 @objc func easy_deleteElement(_ element: Any)
 @objc func easy_deleteAll()
 @objc func easy_beginUpdates()
@@ -226,7 +226,7 @@ pod 'EasyListView'
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/moliya/EasyListView", from: "1.0.0")
+    .package(url: "https://github.com/moliya/EasyListView", from: "1.1.0")
 ]
 ```
 
