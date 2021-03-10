@@ -14,6 +14,8 @@ extension UIScrollView: EasyListCompatible { }
 
 public extension EasyListExtension where Base: UIScrollView {
     
+    typealias ViewOrClosure = Any
+    
     // MARK: - Coordinator
     var coordinator: EasyListCoordinator {
         get {
@@ -33,9 +35,9 @@ public extension EasyListExtension where Base: UIScrollView {
     /**
     添加一个视图元素
     
-    * parameter view: 要添加的视图
+    * parameter view: 视图或闭包
     */
-    func append(_ view: UIView) {
+    func append(_ view: ViewOrClosure) {
         var inset = coordinator.globalEdgeInsets
         if coordinator.elements.count > 0 {
             inset.top = coordinator.globalSpacing
@@ -46,10 +48,10 @@ public extension EasyListExtension where Base: UIScrollView {
     /**
     添加一个视图元素
     
-    * parameter view: 要添加的视图
+    * parameter view: 视图或闭包
     * parameter spacing: 与上一个视图的间距
     */
-    func append(_ view: UIView, spacing: CGFloat) {
+    func append(_ view: ViewOrClosure, spacing: CGFloat) {
         var inset = coordinator.globalEdgeInsets
         inset.top = spacing
         append(view, with: inset)
@@ -58,11 +60,11 @@ public extension EasyListExtension where Base: UIScrollView {
     /**
     添加一个视图元素
     
-    * parameter view: 要添加的视图
+    * parameter view: 视图或闭包
     * parameter identifier: 视图唯一标识
     * parameter spacing: 与上一个视图的间距
     */
-    func append(_ view: UIView, for identifier: String = "", spacing: CGFloat = 0) {
+    func append(_ view: ViewOrClosure, for identifier: String = "", spacing: CGFloat = 0) {
         var inset = coordinator.globalEdgeInsets
         inset.top = spacing
         append(view, with: inset, for: identifier)
@@ -71,11 +73,11 @@ public extension EasyListExtension where Base: UIScrollView {
     /**
     添加一个视图元素
     
-    * parameter view: 要添加的视图
+    * parameter view: 视图或闭包
     * parameter insets: 视图自定义的间距
     * parameter identifier: 视图唯一标识
     */
-    func append(_ view: UIView, with insets: UIEdgeInsets, for identifier: String = "") {
+    func append(_ view: ViewOrClosure, with insets: UIEdgeInsets, for identifier: String = "") {
         let scrollView = base
         
         //移除旧的约束
@@ -94,16 +96,23 @@ public extension EasyListExtension where Base: UIScrollView {
             }
         }
         //添加子视图
-        var contentView: EasyListContentView
+        var contentView = EasyListContentView()
         if let disposableView = view as? EasyListContentView {
             //动态元素
             contentView = disposableView
             coordinator.disposableElements.append(EasyListCoordinator.Element(view: contentView))
-        } else {
+        } else if let staticView = view as? UIView {
             //静态元素
-            contentView = EasyListContentView()
-            
-            var view = view
+            var view = staticView
+            if let cell = view as? UITableViewCell {
+                view = cell.contentView
+                coordinator.cells[contentView] = cell
+            }
+            view.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(view)
+        } else if let closure = view as? () -> UIView {
+            //闭包
+            var view = closure()
             if let cell = view as? UITableViewCell {
                 view = cell.contentView
                 coordinator.cells[contentView] = cell
@@ -140,13 +149,13 @@ public extension EasyListExtension where Base: UIScrollView {
     /**
     插入一个视图元素
     
-    * parameter view: 要插入的视图
+    * parameter view: 视图或闭包
     * parameter element: 前一个视图元素，可以是UIView，也可以是视图唯一标识
     * parameter insets: 视图自定义的间距
     * parameter identifier: 视图唯一标识
     * parameter completion: 插入完成回调
     */
-    func insert(_ view: UIView, after element: Any, with insets: UIEdgeInsets = .zero, for identifier: String = "", completion: (() -> Void)? = nil) {
+    func insert(_ view: ViewOrClosure, after element: Any, with insets: UIEdgeInsets = .zero, for identifier: String = "", completion: (() -> Void)? = nil) {
         let scrollView = base
         let duration = coordinator.animationDuration
         let elements = coordinator.elements
@@ -201,17 +210,24 @@ public extension EasyListExtension where Base: UIScrollView {
             }
         }
         //插入子视图
-        var contentView: EasyListContentView
+        var contentView = EasyListContentView()
         var isDisposable = false
         if let disposableView = view as? EasyListContentView {
             //动态元素
             contentView = disposableView
             isDisposable = true
-        } else {
+        } else if let staticView = view as? UIView {
             //静态元素
-            contentView = EasyListContentView()
-            
-            var view = view
+            var view = staticView
+            if let cell = view as? UITableViewCell {
+                view = cell.contentView
+                coordinator.cells[contentView] = cell
+            }
+            view.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(view)
+        } else if let closure = view as? () -> UIView {
+            //闭包
+            var view = closure()
             if let cell = view as? UITableViewCell {
                 view = cell.contentView
                 coordinator.cells[contentView] = cell
@@ -283,13 +299,13 @@ public extension EasyListExtension where Base: UIScrollView {
     /**
     插入一个视图元素
     
-    * parameter view: 要插入的视图
+    * parameter view: 视图或闭包
     * parameter element: 后一个视图元素，可以是UIView，也可以是视图唯一标识
     * parameter insets: 视图自定义的间距
     * parameter identifier: 视图唯一标识
     * parameter completion: 插入完成回调
     */
-    func insert(_ view: UIView, before element: Any, with insets: UIEdgeInsets = .zero, for identifier: String = "", completion: (() -> Void)? = nil) {
+    func insert(_ view: ViewOrClosure, before element: Any, with insets: UIEdgeInsets = .zero, for identifier: String = "", completion: (() -> Void)? = nil) {
         let scrollView = base
         let duration = coordinator.animationDuration
         let elements = coordinator.elements
@@ -344,17 +360,24 @@ public extension EasyListExtension where Base: UIScrollView {
             }
         }
         //插入子视图
-        var contentView: EasyListContentView
+        var contentView = EasyListContentView()
         var isDisposable = false
         if let disposableView = view as? EasyListContentView {
             //动态元素
             contentView = disposableView
             isDisposable = true
-        } else {
+        } else if let staticView = view as? UIView {
             //静态元素
-            contentView = EasyListContentView()
-            
-            var view = view
+            var view = staticView
+            if let cell = view as? UITableViewCell {
+                view = cell.contentView
+                coordinator.cells[contentView] = cell
+            }
+            view.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(view)
+        } else if let closure = view as? () -> UIView {
+            //闭包
+            var view = closure()
             if let cell = view as? UITableViewCell {
                 view = cell.contentView
                 coordinator.cells[contentView] = cell

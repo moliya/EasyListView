@@ -204,6 +204,9 @@ class FormListController: UIViewController {
         let picker = UIDatePicker()
         picker.backgroundColor = .white
         picker.datePickerMode = .date
+        if #available(iOS 13.4, *) {
+            picker.preferredDatePickerStyle = .wheels
+        }
         picker.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
         
         if let text = birthdayLabel.text, !text.isEmpty {

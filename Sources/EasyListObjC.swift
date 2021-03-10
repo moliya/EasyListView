@@ -10,6 +10,8 @@ import UIKit
 
 public extension UIScrollView {
     
+    typealias ViewOrClosure = Any
+    
     // MARK: - Coordinator
     @objc var easy_coordinator: EasyListCoordinator {
         get {
@@ -21,52 +23,52 @@ public extension UIScrollView {
     }
     
     // MARK: - Append
-    @objc func easy_appendView(_ view: UIView) {
+    @objc func easy_appendView(_ view: ViewOrClosure) {
         easy.append(view)
     }
     
-    @objc func easy_appendView(_ view: UIView, spacing: CGFloat) {
+    @objc func easy_appendView(_ view: ViewOrClosure, spacing: CGFloat) {
         easy.append(view, spacing: spacing)
     }
     
-    @objc func easy_appendView(_ view: UIView, forIdentifier identifier: String, spacing: CGFloat) {
+    @objc func easy_appendView(_ view: ViewOrClosure, forIdentifier identifier: String, spacing: CGFloat) {
         easy.append(view, for: identifier, spacing: spacing)
     }
     
-    @objc func easy_appendView(_ view: UIView, forIdentifier identifier: String, withInsets insets: UIEdgeInsets) {
+    @objc func easy_appendView(_ view: ViewOrClosure, forIdentifier identifier: String, withInsets insets: UIEdgeInsets) {
         easy.append(view, with: insets, for: identifier)
     }
     
     // MARK: - Insert
-    @objc func easy_insertView(_ view: UIView, after element: Any) {
+    @objc func easy_insertView(_ view: ViewOrClosure, after element: Any) {
         easy.insert(view, after: element)
     }
     
-    @objc func easy_insertView(_ view: UIView, after element: Any, withInsets insets: UIEdgeInsets) {
+    @objc func easy_insertView(_ view: ViewOrClosure, after element: Any, withInsets insets: UIEdgeInsets) {
         easy.insert(view, after: element, with: insets)
     }
     
-    @objc func easy_insertView(_ view: UIView, after element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String) {
+    @objc func easy_insertView(_ view: ViewOrClosure, after element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String) {
         easy.insert(view, after: element, with: insets, for: identifier)
     }
     
-    @objc func easy_insertView(_ view: UIView, after element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String, completion: (() -> Void)?) {
+    @objc func easy_insertView(_ view: ViewOrClosure, after element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String, completion: (() -> Void)?) {
         easy.insert(view, after: element, with: insets, for: identifier, completion: completion)
     }
     
-    @objc func easy_insertView(_ view: UIView, before element: Any) {
+    @objc func easy_insertView(_ view: ViewOrClosure, before element: Any) {
         easy.insert(view, before: element)
     }
     
-    @objc func easy_insertView(_ view: UIView, before element: Any, withInsets insets: UIEdgeInsets) {
+    @objc func easy_insertView(_ view: ViewOrClosure, before element: Any, withInsets insets: UIEdgeInsets) {
         easy.insert(view, before: element, with: insets)
     }
     
-    @objc func easy_insertView(_ view: UIView, before element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String) {
+    @objc func easy_insertView(_ view: ViewOrClosure, before element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String) {
         easy.insert(view, before: element, with: insets, for: identifier)
     }
     
-    @objc func easy_insertView(_ view: UIView, before element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String, completion: (() -> Void)?) {
+    @objc func easy_insertView(_ view: ViewOrClosure, before element: Any, withInsets insets: UIEdgeInsets, forIdentifier identifier: String, completion: (() -> Void)?) {
         easy.insert(view, before: element, with: insets, for: identifier, completion: completion)
     }
     
