@@ -226,7 +226,7 @@ pod 'EasyListView'
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/moliya/EasyListView", from: "1.1.0")
+    .package(url: "https://github.com/moliya/EasyListView", from: "1.1.1")
 ]
 ```
 
