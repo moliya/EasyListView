@@ -123,12 +123,8 @@ public extension UIScrollView {
         easy.delete(element)
     }
     
-    @objc func easy_deleteElement(_ element: Any, remainSpacing spacing: CGFloat) {
-        easy.delete(element, remainSpacing: spacing)
-    }
-    
-    @objc func easy_deleteElement(_ element: Any, remainSpacing spacing: CGFloat, completion: (() -> Void)?) {
-        easy.delete(element, remainSpacing: spacing, completion: completion)
+    @objc func easy_deleteElement(_ element: Any, completion: (() -> Void)?) {
+        easy.delete(element, completion: completion)
     }
     
     @objc func easy_deleteAll() {
@@ -138,6 +134,10 @@ public extension UIScrollView {
     // MARK: - BatchUpdate
     @objc func easy_beginUpdates() {
         easy.beginUpdates()
+    }
+    
+    @objc func easy_beginUpdates(option: EasyListUpdateOption) {
+        easy.beginUpdates(option: option)
     }
     
     @objc func easy_endUpdates() {
@@ -162,15 +162,15 @@ public extension UIScrollView {
     }
     
     // MARK: - Getter
-    @objc func easy_getElement(identifier: String) -> UIView? {
+    @objc func easy_getElement(identifier: String) -> AnyObject? {
         return easy.getElement(identifier: identifier)
     }
     
-    @objc func easy_getDisposableElementAtIndex(_ index: Int) -> UIView? {
+    @objc func easy_getDisposableElementAtIndex(_ index: Int) -> AnyObject? {
         return easy.getDisposableElement(at: index)
     }
     
-    @objc var easy_visibleDisposableElements: [UIView] {
+    @objc var easy_visibleDisposableElements: [AnyObject] {
         return easy.visibleDisposableElements
     }
 }

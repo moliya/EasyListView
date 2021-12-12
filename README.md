@@ -92,8 +92,8 @@ self.scrollView.easy.insert(textField, before: self.scrollView)
 删除指定视图对象，带动画效果
 
 ```swift
-//删除label，并留下10的间距
-self.scrollView.easy.delete(label, remainSpacing: 10, completion: nil)
+//删除label
+self.scrollView.easy.delete(label, completion: nil)
 ```
 
 ```swift
@@ -107,7 +107,7 @@ self.scrollView.easy.deleteAll()
 
 ```
 //开始更新
-func beginUpdates()
+func beginUpdates(option: EasyListUpdateOption = .animatedLayout)
 //结束更新，带完成回调
 func endUpdates(_ completion: (() -> Void)? = nil)
 ```
@@ -226,7 +226,7 @@ pod 'EasyListView'
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/moliya/EasyListView", from: "1.1.1")
+    .package(url: "https://github.com/moliya/EasyListView", from: "1.2.0")
 ]
 ```
 

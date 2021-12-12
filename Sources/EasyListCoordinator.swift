@@ -8,14 +8,22 @@
 
 import UIKit
 
+@objc(KFEasyListUpdateOption)
+public enum EasyListUpdateOption: Int {
+    case animatedLayout = 0 //带动画的布局更新
+    case onlyLayout //无动画的布局更新
+    case noLayout //不进行布局
+}
+
 @objcMembers
 open class EasyListCoordinator: NSObject {
     
     internal struct Element {
         var view: EasyListContentView
+        var insets: UIEdgeInsets = .zero
         var identifier: String?
         var deleting: Bool = false
-        var remainSpacing: CGFloat = 0
+        var inserting: Bool = false
     }
     
     public weak private(set) var scrollView: UIScrollView?
@@ -31,6 +39,7 @@ open class EasyListCoordinator: NSObject {
     internal var disposableElements = [Element]()
     internal var cells = [EasyListContentView: UITableViewCell]()
     internal var onBatchUpdate = false
+    internal var batchUpdateOption: EasyListUpdateOption = .animatedLayout
     
     @objc(initWithScrollView:)
     public init(with scrollView: UIScrollView) {

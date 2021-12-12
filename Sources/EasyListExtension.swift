@@ -14,7 +14,15 @@ extension UIScrollView: EasyListCompatible { }
 
 public extension EasyListExtension where Base: UIScrollView {
     
+    internal enum SearchCondition {
+        case first(UIView, NSLayoutConstraint.Attribute)
+        case second(UIView, NSLayoutConstraint.Attribute)
+        case both(UIView?, NSLayoutConstraint.Attribute,
+                  UIView?, NSLayoutConstraint.Attribute)
+    }
+    
     typealias ViewOrClosure = Any
+    internal typealias Element = EasyListCoordinator.Element
     
     // MARK: - Coordinator
     var coordinator: EasyListCoordinator {
@@ -81,26 +89,17 @@ public extension EasyListExtension where Base: UIScrollView {
         let scrollView = base
         
         //移除旧的约束
-        for constraint in scrollView.constraints {
-            if constraint.firstAttribute == .bottom {
-                if let first = constraint.firstItem as? UIScrollView, first == scrollView {
-                    constraint.isActive = false
-                    break
-                }
-            }
-            if constraint.secondAttribute == .bottom {
-                if let second = constraint.secondItem as? UIScrollView, second == scrollView {
-                    constraint.isActive = false
-                    break
-                }
-            }
-        }
+        searchConstraintsIn(scrollView, with: [
+            .first(scrollView, .bottom),
+            .second(scrollView, .bottom)
+        ]).forEach { $0.isActive = false }
         //添加子视图
         var contentView = EasyListContentView()
+        var isDisposable = false
         if let disposableView = view as? EasyListContentView {
             //动态元素
             contentView = disposableView
-            coordinator.disposableElements.append(EasyListCoordinator.Element(view: contentView))
+            isDisposable = true
         } else if let staticView = view as? UIView {
             //静态元素
             var view = staticView
@@ -123,26 +122,34 @@ public extension EasyListExtension where Base: UIScrollView {
         
         guard let view = contentView.subviews.first else { return }
         
-        addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
-        addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing)
-        addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top)
-        addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
+        addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading, constant: insets.left)
+        addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing, constant: -insets.right)
+        addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top, constant: insets.top)
+        addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom, constant: -insets.bottom)
         
         contentView.clipsToBounds = true
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
         
-        addConstraint(for: scrollView, item1: scrollView, attr1: .width, item2: contentView, attr2: .width, constant: insets.left + insets.right)
-        addConstraint(for: scrollView, item1: contentView, attr1: .leading, item2: scrollView, attr2: .leading, constant: insets.left)
-        addConstraint(for: scrollView, item1: contentView, attr1: .trailing, item2: scrollView, attr2: .trailing, constant: -insets.right)
-        addConstraint(for: scrollView, item1: contentView, attr1: .bottom, item2: scrollView, attr2: .bottom, constant: -insets.bottom)
+        addConstraint(for: scrollView, item1: scrollView, attr1: .width, item2: contentView, attr2: .width)
+        addConstraint(for: scrollView, item1: contentView, attr1: .leading, item2: scrollView, attr2: .leading)
+        addConstraint(for: scrollView, item1: contentView, attr1: .trailing, item2: scrollView, attr2: .trailing)
+        addConstraint(for: scrollView, item1: contentView, attr1: .bottom, item2: scrollView, attr2: .bottom)
         if let lastView = coordinator.elements.last?.view {
-            addConstraint(for: scrollView, item1: contentView, attr1: .top, item2: lastView, attr2: .bottom, constant: insets.top)
+            addConstraint(for: scrollView, item1: contentView, attr1: .top, item2: lastView, attr2: .bottom)
         } else {
-            addConstraint(for: scrollView, item1: contentView, attr1: .top, item2: scrollView, attr2: .top, constant: insets.top)
+            addConstraint(for: scrollView, item1: contentView, attr1: .top, item2: scrollView, attr2: .top)
         }
         
-        coordinator.elements.append(EasyListCoordinator.Element(view: contentView, identifier: identifier))
+        var element = Element(view: contentView, insets: insets, identifier: identifier)
+        coordinator.elements.append(element)
+        if isDisposable {
+            coordinator.disposableElements.append(Element(view: contentView, insets: insets, identifier: identifier))
+        }
+        
+        if coordinator.onBatchUpdate {
+            element.inserting = true
+        }
     }
     
     // MARK: - Insert
@@ -157,7 +164,6 @@ public extension EasyListExtension where Base: UIScrollView {
     */
     func insert(_ view: ViewOrClosure, after element: Any, with insets: UIEdgeInsets = .zero, for identifier: String = "", completion: (() -> Void)? = nil) {
         let scrollView = base
-        let duration = coordinator.animationDuration
         let elements = coordinator.elements
         
         var relateView: UIView?
@@ -175,6 +181,7 @@ public extension EasyListExtension where Base: UIScrollView {
         }
         assert(relateView != nil, "invalid element")
         
+        //查找前后视图及下标
         var previousView: UIView?
         var nextView: UIView = scrollView
         var flag = false
@@ -196,104 +203,7 @@ public extension EasyListExtension where Base: UIScrollView {
             }
         }
         
-        //移除旧的约束
-        for constraint in scrollView.constraints {
-            if let first = constraint.firstItem as? UIView, first == previousView,
-                let second = constraint.secondItem as? UIView, second == nextView {
-                constraint.isActive = false
-                break
-            }
-            if let first = constraint.firstItem as? UIView, first == nextView,
-                let second = constraint.secondItem as? UIView, second == previousView {
-                constraint.isActive = false
-                break
-            }
-        }
-        //插入子视图
-        var contentView = EasyListContentView()
-        var isDisposable = false
-        if let disposableView = view as? EasyListContentView {
-            //动态元素
-            contentView = disposableView
-            isDisposable = true
-        } else if let staticView = view as? UIView {
-            //静态元素
-            var view = staticView
-            if let cell = view as? UITableViewCell {
-                view = cell.contentView
-                coordinator.cells[contentView] = cell
-            }
-            view.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(view)
-        } else if let closure = view as? () -> UIView {
-            //闭包
-            var view = closure()
-            if let cell = view as? UITableViewCell {
-                view = cell.contentView
-                coordinator.cells[contentView] = cell
-            }
-            view.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(view)
-        }
-        
-        guard let view = contentView.subviews.first else { return }
-        
-        addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
-        addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing)
-        addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top)
-        let heightConstraint = addConstraint(for: contentView, item1: contentView, attr1: .height, item2: nil, attr2: .notAnAttribute)
-        
-        contentView.clipsToBounds = true
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(contentView)
-        
-        addConstraint(for: scrollView, item1: scrollView, attr1: .width, item2: contentView, attr2: .width, constant: insets.left + insets.right)
-        addConstraint(for: scrollView, item1: contentView, attr1: .leading, item2: scrollView, attr2: .leading, constant: insets.left)
-        addConstraint(for: scrollView, item1: contentView, attr1: .trailing, item2: scrollView, attr2: .trailing, constant: -insets.right)
-        if previousView == scrollView {
-            addConstraint(for: scrollView, item1: contentView, attr1: .top, item2: previousView, attr2: .top, constant: insets.top)
-        } else {
-            addConstraint(for: scrollView, item1: contentView, attr1: .top, item2: previousView, attr2: .bottom, constant: insets.top)
-        }
-        if nextView == scrollView {
-            addConstraint(for: scrollView, item1: contentView, attr1: .bottom, item2: nextView, attr2: .bottom, constant: -insets.bottom)
-        } else {
-            addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: contentView, attr2: .bottom, constant: insets.bottom)
-        }
-        //更新contentView约束
-        let updateClosure = {
-            //删除height约束
-            contentView.constraints.first { $0.firstAttribute == .height }?.isActive = false
-            //添加bottom约束
-            addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
-        }
-        
-        coordinator.elements.insert(EasyListCoordinator.Element(view: contentView, identifier: identifier), at: index)
-        //更新布局
-        UIView.animate(withDuration: duration * 1 / 4, animations: {
-            scrollView.layoutIfNeeded()
-        }) { _ in
-            if isDisposable {
-                let minY = contentView.frame.minY
-                var index = 0
-                for tmp in self.coordinator.disposableElements {
-                    if tmp.view.frame.minY > minY {
-                        break
-                    }
-                    index += 1
-                }
-                self.coordinator.disposableElements.insert(EasyListCoordinator.Element(view: contentView), at: index)
-            }
-            //更新高度约束
-            heightConstraint.constant = view.frame.size.height
-            UIView.animate(withDuration: duration * 3 / 4, animations: {
-                scrollView.layoutIfNeeded()
-            }) { _ in
-                self.reloadDisposableIfNeed()
-                updateClosure()
-                completion?()
-            }
-        }
+        insert(view, previousView: previousView, nextView: nextView, index: index, with: insets, for: identifier, completion: completion)
     }
     
     /**
@@ -307,7 +217,6 @@ public extension EasyListExtension where Base: UIScrollView {
     */
     func insert(_ view: ViewOrClosure, before element: Any, with insets: UIEdgeInsets = .zero, for identifier: String = "", completion: (() -> Void)? = nil) {
         let scrollView = base
-        let duration = coordinator.animationDuration
         let elements = coordinator.elements
         
         var relateView: UIView?
@@ -325,6 +234,7 @@ public extension EasyListExtension where Base: UIScrollView {
         }
         assert(relateView != nil, "invalid element")
         
+        //查找前后视图及下标
         var previousView: UIView = scrollView
         var nextView: UIView?
         var flag = false
@@ -346,19 +256,34 @@ public extension EasyListExtension where Base: UIScrollView {
             }
         }
         
+        insert(view, previousView: previousView, nextView: nextView, index: index, with: insets, for: identifier, completion: completion)
+    }
+    
+    /**
+     插入一个视图元素
+     
+     * parameter view: 视图或闭包
+     * parameter previousView: 前一个视图元素
+     * parameter nextView: 后一个视图元素
+     * parameter index: 插入的下标
+     * parameter insets: 视图自定义的间距
+     * parameter identifier: 视图唯一标识
+     * parameter completion: 插入完成回调
+     */
+    internal func insert(_ view: ViewOrClosure, previousView: UIView?, nextView: UIView?, index: Int, with insets: UIEdgeInsets, for identifier: String, completion: (() -> Void)?) {
+        let scrollView = base
+        
         //移除旧的约束
-        for constraint in scrollView.constraints {
-            if let first = constraint.firstItem as? UIView, first == previousView,
-                let second = constraint.secondItem as? UIView, second == nextView {
-                constraint.isActive = false
-                break
-            }
-            if let first = constraint.firstItem as? UIView, first == nextView,
-                let second = constraint.secondItem as? UIView, second == previousView {
-                constraint.isActive = false
-                break
-            }
-        }
+        searchConstraintsIn(scrollView, with: [
+            .both(previousView, .top, nextView, .top),
+            .both(previousView, .top, nextView, .bottom),
+            .both(previousView, .bottom, nextView, .top),
+            .both(previousView, .bottom, nextView, .bottom),
+            .both(nextView, .top, previousView, .top),
+            .both(nextView, .top, previousView, .bottom),
+            .both(nextView, .bottom, previousView, .top),
+            .both(nextView, .bottom, previousView, .bottom)
+        ]).forEach { $0.isActive = false }
         //插入子视图
         var contentView = EasyListContentView()
         var isDisposable = false
@@ -388,62 +313,53 @@ public extension EasyListExtension where Base: UIScrollView {
         
         guard let view = contentView.subviews.first else { return }
         
-        addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
-        addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing)
-        addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top)
-        let heightConstraint = addConstraint(for: contentView, item1: contentView, attr1: .height, item2: nil, attr2: .notAnAttribute)
+        addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading, constant: insets.left)
+        addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing, constant: -insets.right)
+        addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top, constant: insets.top)
+        addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom, constant: -insets.bottom)
         
         contentView.clipsToBounds = true
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
         
-        addConstraint(for: scrollView, item1: scrollView, attr1: .width, item2: contentView, attr2: .width, constant: insets.left + insets.right)
-        addConstraint(for: scrollView, item1: contentView, attr1: .leading, item2: scrollView, attr2: .leading, constant: insets.left)
-        addConstraint(for: scrollView, item1: contentView, attr1: .trailing, item2: scrollView, attr2: .trailing, constant: -insets.right)
+        addConstraint(for: scrollView, item1: scrollView, attr1: .width, item2: contentView, attr2: .width)
+        addConstraint(for: scrollView, item1: contentView, attr1: .leading, item2: scrollView, attr2: .leading)
+        addConstraint(for: scrollView, item1: contentView, attr1: .trailing, item2: scrollView, attr2: .trailing)
         if previousView == scrollView {
-            addConstraint(for: scrollView, item1: contentView, attr1: .top, item2: previousView, attr2: .top, constant: insets.top)
+            addConstraint(for: scrollView, item1: contentView, attr1: .top, item2: previousView, attr2: .top)
         } else {
-            addConstraint(for: scrollView, item1: contentView, attr1: .top, item2: previousView, attr2: .bottom, constant: insets.top)
+            addConstraint(for: scrollView, item1: contentView, attr1: .top, item2: previousView, attr2: .bottom)
         }
         if nextView == scrollView {
-            addConstraint(for: scrollView, item1: contentView, attr1: .bottom, item2: nextView, attr2: .bottom, constant: -insets.bottom)
+            addConstraint(for: scrollView, item1: contentView, attr1: .bottom, item2: nextView, attr2: .bottom)
         } else {
-            addConstraint(for: scrollView, item1: nextView!, attr1: .top, item2: contentView, attr2: .bottom, constant: insets.bottom)
-        }
-        //更新contentView约束
-        let updateClosure = {
-            //删除height约束
-            contentView.constraints.first { $0.firstAttribute == .height }?.isActive = false
-            //添加bottom约束
-            addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
+            addConstraint(for: scrollView, item1: nextView!, attr1: .top, item2: contentView, attr2: .bottom)
         }
         
-        coordinator.elements.insert(EasyListCoordinator.Element(view: contentView, identifier: identifier), at: index)
-        //更新布局
-        UIView.animate(withDuration: duration * 1 / 4, animations: {
-            scrollView.layoutIfNeeded()
-        }) { _ in
-            if isDisposable {
-                let minY = contentView.frame.minY
-                var index = 0
-                for tmp in self.coordinator.disposableElements {
-                    if tmp.view.frame.minY > minY {
-                        break
+        var element = Element(view: contentView, insets: insets, identifier: identifier)
+        element.inserting = true
+        coordinator.elements.insert(element, at: index)
+        if isDisposable {
+            var disposableIndex = 0
+            for tmp in coordinator.disposableElements {
+                for i in 0 ..< index {
+                    if tmp.view == coordinator.elements[i].view {
+                        disposableIndex += 1
                     }
-                    index += 1
                 }
-                self.coordinator.disposableElements.insert(EasyListCoordinator.Element(view: contentView), at: index)
             }
-            //更新高度约束
-            heightConstraint.constant = view.frame.size.height
-            UIView.animate(withDuration: duration * 3 / 4, animations: {
-                scrollView.layoutIfNeeded()
-            }) { _ in
-                self.reloadDisposableIfNeed()
-                updateClosure()
-                completion?()
-            }
+            coordinator.disposableElements.insert(Element(view: contentView, insets: insets, identifier: identifier), at: disposableIndex)
         }
+        
+        if coordinator.onBatchUpdate {
+            completion?()
+            return
+        }
+        
+        animateInsertion(completion: {
+            self.reloadDisposableIfNeed()
+            completion?()
+        }, duration: coordinator.animationDuration)
     }
     
     // MARK: - Delete
@@ -451,10 +367,9 @@ public extension EasyListExtension where Base: UIScrollView {
     删除一个视图元素
     
     * parameter element: 要删除的视图，可以是UIView，也可以是视图的唯一标识
-    * parameter spacing: 视图移除后留下的上下间距
     * parameter completion: 删除完成后的回调
     */
-    func delete(_ element: Any, remainSpacing spacing: CGFloat = 0, completion: (() -> Void)? = nil) {
+    func delete(_ element: Any, completion: (() -> Void)? = nil) {
         let elements = coordinator.elements
         
         var targetView: UIView?
@@ -468,24 +383,23 @@ public extension EasyListExtension where Base: UIScrollView {
         }
         assert(targetView != nil, "invalid element")
         
-        for i in 0 ..< coordinator.elements.count {
-            if targetView == coordinator.elements[i].view {
-                if !coordinator.elements[i].deleting {
-                    coordinator.elements[i].deleting = true
-                    coordinator.elements[i].remainSpacing = spacing
-                    break
-                }
+        coordinator.elements = coordinator.elements.map {
+            var tmp = $0
+            if targetView == tmp.view && !tmp.deleting {
+                tmp.deleting = true
             }
+            return tmp
         }
         
         if coordinator.onBatchUpdate {
+            completion?()
             return
         }
         
-        applyDeletion {
+        animateDeletion(completion: {
             self.reloadDisposableIfNeed()
             completion?()
-        }
+        }, duration: coordinator.animationDuration)
     }
     
     /**
@@ -504,10 +418,12 @@ public extension EasyListExtension where Base: UIScrollView {
     /**
     开始批量更新操作
     
-    * Note: 需和endUpdates成对使用。批量更新操作包括append(添加)和delete(删除)
+    * parameter option: 更新方式
+    * Note: 需和endUpdates成对使用。
     */
-    func beginUpdates() {
+    func beginUpdates(option: EasyListUpdateOption = .animatedLayout) {
         coordinator.onBatchUpdate = true
+        coordinator.batchUpdateOption = option
     }
     
     /**
@@ -517,18 +433,38 @@ public extension EasyListExtension where Base: UIScrollView {
     */
     func endUpdates(_ completion: (() -> Void)? = nil) {
         coordinator.onBatchUpdate = false
-        
-        //是否有删除元素
-        let count = coordinator.elements.filter { $0.deleting }.count
-        if count > 0 {
-            //执行删除操作
-            applyDeletion {
-                self.reloadDisposableIfNeed()
-                completion?()
-            }
-        } else {
-            //不执行删除操作
+        if coordinator.batchUpdateOption == .noLayout {
+            //不执行layout
+            completion?()
+            return
+        }
+        if coordinator.batchUpdateOption == .onlyLayout {
+            //无动画的layout
             base.layoutIfNeeded()
+            self.reloadDisposableIfNeed()
+            completion?()
+            return
+        }
+        
+        //带动画的layout
+        let insertingCount = coordinator.elements.filter { $0.inserting }.count
+        let deletingCount = coordinator.elements.filter { $0.deleting }.count
+        
+        let duration = coordinator.animationDuration
+        if insertingCount > 0 && deletingCount > 0 {
+            //先执行插入动画
+            self.animateInsertion(completion: {
+                //再执行删除动画
+                self.animateDeletion(completion: completion, duration: duration / 2)
+            }, duration: duration / 2)
+        } else if insertingCount > 0 {
+            //执行插入动画
+            self.animateInsertion(completion: completion, duration: duration)
+        } else if deletingCount > 0 {
+            //执行删除动画
+            self.animateDeletion(completion: completion, duration: duration)
+        } else {
+            //兜底代码
             self.reloadDisposableIfNeed()
             completion?()
         }
@@ -595,10 +531,10 @@ public extension EasyListExtension where Base: UIScrollView {
                     }
                     view.translatesAutoresizingMaskIntoConstraints = false
                     contentView.addSubview(view)
-                    addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading)
-                    addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing)
-                    addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top)
-                    addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom)
+                    addConstraint(for: contentView, item1: view, attr1: .leading, item2: contentView, attr2: .leading, constant: element.insets.left)
+                    addConstraint(for: contentView, item1: view, attr1: .trailing, item2: contentView, attr2: .trailing, constant: -element.insets.right)
+                    addConstraint(for: contentView, item1: view, attr1: .top, item2: contentView, attr2: .top, constant: element.insets.top)
+                    addConstraint(for: contentView, item1: view, attr1: .bottom, item2: contentView, attr2: .bottom, constant: -element.insets.bottom)
                     //删除height约束
                     contentView.constraints.first { $0.firstAttribute == .height }?.isActive = false
                 }
@@ -667,20 +603,72 @@ public extension EasyListExtension where Base: UIScrollView {
     }
     
     // MARK: - Private
-    // 执行删除逻辑
-    private func applyDeletion(completion: (() -> Void)? = nil) {
+    //插入动画
+    private func animateInsertion(completion: (() -> Void)? = nil, duration: TimeInterval) {
         let scrollView = base
-        let duration = coordinator.animationDuration
         let elements = coordinator.elements
         
-        var list = [(UIView, UIView, CGFloat)]()
+        //替换bottom约束为高度约束
+        let insertingViews = elements.filter { $0.inserting }.map { $0.view }
+        var heightConstraints = [(constraint: NSLayoutConstraint, subview: UIView, offset: CGFloat)]()
+        var bottomConstraints = [NSLayoutConstraint]()
+        for view in insertingViews {
+            var offset: CGFloat = 0
+            searchConstraintsIn(view, with: [
+                .first(view, .top),
+                .second(view, .top),
+                .first(view, .bottom),
+                .second(view, .bottom)
+            ]).forEach {
+                if $0.firstAttribute == .top || $0.secondAttribute == .top {
+                    offset += $0.constant
+                } else {
+                    bottomConstraints.append($0)
+                    $0.isActive = false
+                    offset -= $0.constant
+                }
+            }
+            let constraint = addConstraint(for: view, item1: view, attr1: .height, item2: nil, attr2: .notAnAttribute)
+            heightConstraints.append((constraint, view.subviews.first!, offset))
+        }
+        
+        scrollView.layoutIfNeeded()
+        //更新高度约束
+        heightConstraints.forEach {
+            $0.constraint.constant = $0.subview.frame.size.height + $0.offset
+        }
+        UIView.animate(withDuration: duration, animations: {
+            scrollView.layoutIfNeeded()
+        }) { _ in
+            self.reloadDisposableIfNeed()
+            //删除height约束
+            heightConstraints.forEach {
+                $0.constraint.isActive = false
+            }
+            //恢复bottom约束
+            bottomConstraints.forEach {
+                $0.isActive = true
+            }
+            self.coordinator.elements = elements.map {
+                var tmp = $0
+                tmp.inserting = false
+                return tmp
+            }
+            completion?()
+        }
+    }
+    
+    // 删除动画
+    private func animateDeletion(completion: (() -> Void)? = nil, duration: TimeInterval) {
+        let scrollView = base
+        let elements = coordinator.elements
+        
+        var list = [(UIView, UIView)]()
         var previousView: UIView = scrollView
         var nextView: UIView?
         var flag = false
-        var spacing: CGFloat = 0
         for element in elements {
             if element.deleting {
-                spacing += element.remainSpacing
                 flag = true
                 continue
             }
@@ -690,16 +678,15 @@ public extension EasyListExtension where Base: UIScrollView {
                 previousView = element.view
             }
             if let view = nextView {
-                list.append((previousView, view, spacing))
+                list.append((previousView, view))
                 
                 previousView = element.view
                 nextView = nil
                 flag = false
-                spacing = 0
             }
         }
         if flag {
-            list.append((previousView, scrollView, spacing))
+            list.append((previousView, scrollView))
         }
         if list.count == 0 {
             completion?()
@@ -725,16 +712,16 @@ public extension EasyListExtension where Base: UIScrollView {
         }
         //添加新的约束
         let updateClosure = {
-            for (previousView, nextView, remainSpacing) in list {
+            for (previousView, nextView) in list {
                 if previousView == nextView {
                     continue
                 }
                 if previousView == scrollView {
-                    addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .top, constant: remainSpacing)
+                    addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .top)
                 } else if nextView == scrollView {
-                    addConstraint(for: scrollView, item1: nextView, attr1: .bottom, item2: previousView, attr2: .bottom, constant: remainSpacing)
+                    addConstraint(for: scrollView, item1: nextView, attr1: .bottom, item2: previousView, attr2: .bottom)
                 } else {
-                    addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .bottom, constant: remainSpacing)
+                    addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .bottom)
                 }
             }
         }
@@ -761,5 +748,40 @@ public extension EasyListExtension where Base: UIScrollView {
     //刷新
     private func reloadDisposableIfNeed() {
         triggerDisposable()
+    }
+    
+    //查找符合条件的约束
+    private func searchConstraintsIn(_ view: UIView, with conditions: [SearchCondition]) -> [NSLayoutConstraint] {
+        var results = [NSLayoutConstraint]()
+        for constraint in view.constraints {
+            for condition in conditions {
+                switch condition {
+                case .first(let firstItem, let firstAttribute):
+                    //匹配first
+                    guard let item = constraint.firstItem as? UIView else { break }
+                    if item == firstItem && constraint.firstAttribute == firstAttribute {
+                        results.append(constraint)
+                    }
+                case .second(let secondItem, let secondAttribute):
+                    //匹配second
+                    guard let item = constraint.secondItem as? UIView else { break }
+                    if item == secondItem && constraint.secondAttribute == secondAttribute {
+                        results.append(constraint)
+                    }
+                case .both(let firstItem, let firstAttribute, let secondItem, let secondAttribute):
+                    //匹配全部
+                    guard let first = constraint.firstItem as? UIView, let second = constraint.secondItem as? UIView else {
+                        break
+                    }
+                    if first == firstItem &&
+                        second == secondItem &&
+                        constraint.firstAttribute == firstAttribute &&
+                        constraint.secondAttribute == secondAttribute {
+                        results.append(constraint)
+                    }
+                }
+            }
+        }
+        return results
     }
 }
