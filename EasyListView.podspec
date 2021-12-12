@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name          = "EasyListView"
-  s.version       = "1.2.0"
+  s.version       = "1.2.1"
   s.summary       = "快速搭建静态及可重用列表"
   s.homepage      = "https://github.com/moliya/EasyListView"
   s.license       = "MIT"

@@ -414,6 +414,22 @@ public extension EasyListExtension where Base: UIScrollView {
         coordinator.disposableElements.removeAll()
     }
     
+    /**
+     移除标记为删除的所有元素
+     
+     */
+    internal func removeDeletingElements() {
+        coordinator.elements.filter {
+            return $0.deleting
+        }.map {
+            return $0.view
+        }.forEach {
+            $0.removeFromSuperview()
+            self.coordinator.cells.removeValue(forKey: $0)
+        }
+        coordinator.elements.removeAll { $0.deleting }
+    }
+    
     // MARK: - BatchUpdate
     /**
     开始批量更新操作
@@ -435,11 +451,13 @@ public extension EasyListExtension where Base: UIScrollView {
         coordinator.onBatchUpdate = false
         if coordinator.batchUpdateOption == .noLayout {
             //不执行layout
+            removeDeletingElements()
             completion?()
             return
         }
         if coordinator.batchUpdateOption == .onlyLayout {
             //无动画的layout
+            removeDeletingElements()
             base.layoutIfNeeded()
             self.reloadDisposableIfNeed()
             completion?()
@@ -735,11 +753,7 @@ public extension EasyListExtension where Base: UIScrollView {
                 scrollView.layoutIfNeeded()
             }) { _ in
                 //完成后移除相关元素
-                deletingViews.forEach { deleteView in
-                    deleteView.removeFromSuperview()
-                    self.coordinator.cells.removeValue(forKey: deleteView)
-                }
-                self.coordinator.elements.removeAll { $0.deleting }
+                self.removeDeletingElements()
                 completion?()
             }
         }
