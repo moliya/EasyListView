@@ -414,22 +414,6 @@ public extension EasyListExtension where Base: UIScrollView {
         coordinator.disposableElements.removeAll()
     }
     
-    /**
-     移除标记为删除的所有元素
-     
-     */
-    internal func removeDeletingElements() {
-        coordinator.elements.filter {
-            return $0.deleting
-        }.map {
-            return $0.view
-        }.forEach {
-            $0.removeFromSuperview()
-            self.coordinator.cells.removeValue(forKey: $0)
-        }
-        coordinator.elements.removeAll { $0.deleting }
-    }
-    
     // MARK: - BatchUpdate
     /**
     开始批量更新操作
@@ -449,25 +433,43 @@ public extension EasyListExtension where Base: UIScrollView {
     */
     func endUpdates(_ completion: (() -> Void)? = nil) {
         coordinator.onBatchUpdate = false
+        
+        let insertingCount = coordinator.elements.filter { $0.inserting }.count
+        let deletingCount = coordinator.elements.filter { $0.deleting }.count
+        
+        //不执行layout
         if coordinator.batchUpdateOption == .noLayout {
-            //不执行layout
-            removeDeletingElements()
+            //清理标记
+            if insertingCount > 0 {
+                lastStepForInserting()
+            }
+            if deletingCount > 0 {
+                lastStepForDeleting()
+            }
+            //完成回调
             completion?()
             return
         }
+        
+        //无动画的layout
         if coordinator.batchUpdateOption == .onlyLayout {
-            //无动画的layout
-            removeDeletingElements()
+            //更新约束
+            resetConstraintsForDeleting()
             base.layoutIfNeeded()
             self.reloadDisposableIfNeed()
+            //清理标记
+            if insertingCount > 0 {
+                lastStepForInserting()
+            }
+            if deletingCount > 0 {
+                lastStepForDeleting()
+            }
+            //完成回调
             completion?()
             return
         }
         
         //带动画的layout
-        let insertingCount = coordinator.elements.filter { $0.inserting }.count
-        let deletingCount = coordinator.elements.filter { $0.deleting }.count
-        
         let duration = coordinator.animationDuration
         if insertingCount > 0 && deletingCount > 0 {
             //先执行插入动画
@@ -667,11 +669,7 @@ public extension EasyListExtension where Base: UIScrollView {
             bottomConstraints.forEach {
                 $0.isActive = true
             }
-            self.coordinator.elements = elements.map {
-                var tmp = $0
-                tmp.inserting = false
-                return tmp
-            }
+            self.lastStepForInserting()
             completion?()
         }
     }
@@ -681,38 +679,12 @@ public extension EasyListExtension where Base: UIScrollView {
         let scrollView = base
         let elements = coordinator.elements
         
-        var list = [(UIView, UIView)]()
-        var previousView: UIView = scrollView
-        var nextView: UIView?
-        var flag = false
-        for element in elements {
-            if element.deleting {
-                flag = true
-                continue
-            }
-            if flag {
-                nextView = element.view
-            } else {
-                previousView = element.view
-            }
-            if let view = nextView {
-                list.append((previousView, view))
-                
-                previousView = element.view
-                nextView = nil
-                flag = false
-            }
-        }
-        if flag {
-            list.append((previousView, scrollView))
-        }
-        if list.count == 0 {
+        //替换bottom约束为高度约束
+        let deletingViews = elements.filter { $0.deleting }.map { $0.view }
+        if deletingViews.count == 0 {
             completion?()
             return
         }
-        
-        //替换bottom约束为高度约束
-        let deletingViews = elements.filter { $0.deleting }.map { $0.view }
         for view in deletingViews {
             let height = view.frame.size.height
             view.constraints.forEach {
@@ -728,32 +700,18 @@ public extension EasyListExtension where Base: UIScrollView {
             
             heightConstraint.constant = 0
         }
-        //添加新的约束
-        let updateClosure = {
-            for (previousView, nextView) in list {
-                if previousView == nextView {
-                    continue
-                }
-                if previousView == scrollView {
-                    addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .top)
-                } else if nextView == scrollView {
-                    addConstraint(for: scrollView, item1: nextView, attr1: .bottom, item2: previousView, attr2: .bottom)
-                } else {
-                    addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .bottom)
-                }
-            }
-        }
         
         //更新布局
         UIView.animate(withDuration: duration * 3 / 4, animations: {
             scrollView.layoutIfNeeded()
         }) { _ in
-            updateClosure()
+            //更新约束
+            self.resetConstraintsForDeleting()
             UIView.animate(withDuration: duration / 4, animations: {
                 scrollView.layoutIfNeeded()
             }) { _ in
                 //完成后移除相关元素
-                self.removeDeletingElements()
+                self.lastStepForDeleting()
                 completion?()
             }
         }
@@ -797,5 +755,68 @@ public extension EasyListExtension where Base: UIScrollView {
             }
         }
         return results
+    }
+    
+    //针对删除的元素重新构建约束
+    private func resetConstraintsForDeleting() {
+        let scrollView = base
+        
+        var list = [(UIView, UIView)]()
+        var previousView: UIView = scrollView
+        var nextView: UIView?
+        var flag = false
+        for element in coordinator.elements {
+            if element.deleting {
+                flag = true
+                continue
+            }
+            if flag {
+                nextView = element.view
+            } else {
+                previousView = element.view
+            }
+            if let view = nextView {
+                list.append((previousView, view))
+                
+                previousView = element.view
+                nextView = nil
+                flag = false
+            }
+        }
+        if flag {
+            list.append((previousView, scrollView))
+        }
+        for (previousView, nextView) in list {
+            if previousView == nextView {
+                continue
+            }
+            if previousView == scrollView {
+                addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .top)
+            } else if nextView == scrollView {
+                addConstraint(for: scrollView, item1: nextView, attr1: .bottom, item2: previousView, attr2: .bottom)
+            } else {
+                addConstraint(for: scrollView, item1: nextView, attr1: .top, item2: previousView, attr2: .bottom)
+            }
+        }
+    }
+    
+    private func lastStepForDeleting() {
+        coordinator.elements.filter {
+            return $0.deleting
+        }.map {
+            return $0.view
+        }.forEach {
+            $0.removeFromSuperview()
+            self.coordinator.cells.removeValue(forKey: $0)
+        }
+        coordinator.elements.removeAll { $0.deleting }
+    }
+    
+    private func lastStepForInserting() {
+        coordinator.elements = coordinator.elements.map {
+            var tmp = $0
+            tmp.inserting = false
+            return tmp
+        }
     }
 }
