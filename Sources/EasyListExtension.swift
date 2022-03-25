@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import EasyCompatible
 
 private var EasyListCoordinatorKey = "EasyListCoordinatorKey"
 //添加easy扩展
-extension UIScrollView: EasyListCompatible { }
+extension UIScrollView: EasyCompatible { }
 
-public extension EasyListExtension where Base: UIScrollView {
+public extension EasyExtension where Base: UIScrollView {
     
     internal enum SearchCondition {
         case first(UIView, NSLayoutConstraint.Attribute)

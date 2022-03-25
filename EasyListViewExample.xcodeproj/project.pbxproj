@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17164BD627EDB6950007A2A0 /* EasyCompatible in Frameworks */ = {isa = PBXBuildFile; productRef = 17164BD527EDB6950007A2A0 /* EasyCompatible */; };
 		171D6E9E24922D0E001FF205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6E9D24922D0E001FF205 /* AppDelegate.swift */; };
 		171D6EA524922D0E001FF205 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171D6EA324922D0E001FF205 /* Main.storyboard */; };
 		171D6EA724922D12001FF205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 171D6EA624922D12001FF205 /* Assets.xcassets */; };
 		171D6EAA24922D12001FF205 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171D6EA824922D12001FF205 /* LaunchScreen.storyboard */; };
 		171D6EB724922EAF001FF205 /* EasyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6EB624922EAF001FF205 /* EasyListView.swift */; };
-		171D6EB924922F28001FF205 /* EasyListCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6EB824922F28001FF205 /* EasyListCompatible.swift */; };
 		176D9E8624DE728A004972E9 /* EasyListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176D9E8524DE728A004972E9 /* EasyListCoordinator.swift */; };
 		176D9E8824DE731C004972E9 /* EasyListExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176D9E8724DE731C004972E9 /* EasyListExtension.swift */; };
 		177AFA9F24DC2216004A9E92 /* EasyListConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */; };
@@ -62,7 +62,6 @@
 		171D6EA924922D12001FF205 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		171D6EAB24922D12001FF205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		171D6EB624922EAF001FF205 /* EasyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListView.swift; path = Sources/EasyListView.swift; sourceTree = SOURCE_ROOT; };
-		171D6EB824922F28001FF205 /* EasyListCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListCompatible.swift; path = Sources/EasyListCompatible.swift; sourceTree = SOURCE_ROOT; };
 		176D9E8524DE728A004972E9 /* EasyListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListCoordinator.swift; path = Sources/EasyListCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		176D9E8724DE731C004972E9 /* EasyListExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListExtension.swift; path = Sources/EasyListExtension.swift; sourceTree = SOURCE_ROOT; };
 		176D9E8924DE86A8004972E9 /* EasyListViewExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyListViewExample-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -113,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17164BD627EDB6950007A2A0 /* EasyCompatible in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				171D6EB624922EAF001FF205 /* EasyListView.swift */,
-				171D6EB824922F28001FF205 /* EasyListCompatible.swift */,
 				176D9E8524DE728A004972E9 /* EasyListCoordinator.swift */,
 				177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */,
 				176D9E8724DE731C004972E9 /* EasyListExtension.swift */,
@@ -271,6 +270,7 @@
 			);
 			name = EasyListViewExample;
 			packageProductDependencies = (
+				17164BD527EDB6950007A2A0 /* EasyCompatible */,
 			);
 			productName = EasyListViewExample;
 			productReference = 171D6E9A24922D0E001FF205 /* EasyListViewExample.app */;
@@ -304,6 +304,7 @@
 			);
 			mainGroup = 171D6E9124922D0E001FF205;
 			packageReferences = (
+				17164BD427EDB6950007A2A0 /* XCRemoteSwiftPackageReference "EasyCompatible" */,
 			);
 			productRefGroup = 171D6E9B24922D0E001FF205 /* Products */;
 			projectDirPath = "";
@@ -339,7 +340,6 @@
 				1782C98524EB7445008FE4CC /* Stevia+Center.swift in Sources */,
 				1782C95724EA2BF9008FE4CC /* MainViewController.swift in Sources */,
 				1782C98424EB7445008FE4CC /* Stevia+Operators.swift in Sources */,
-				171D6EB924922F28001FF205 /* EasyListCompatible.swift in Sources */,
 				176D9E8824DE731C004972E9 /* EasyListExtension.swift in Sources */,
 				1782C9A924EB779D008FE4CC /* ESRefreshHeaderAnimator.swift in Sources */,
 				1782C98D24EB7445008FE4CC /* Stevia+Constraints.swift in Sources */,
@@ -586,6 +586,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		17164BD427EDB6950007A2A0 /* XCRemoteSwiftPackageReference "EasyCompatible" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:moliya/EasyCompatible.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		17164BD527EDB6950007A2A0 /* EasyCompatible */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17164BD427EDB6950007A2A0 /* XCRemoteSwiftPackageReference "EasyCompatible" */;
+			productName = EasyCompatible;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 171D6E9224922D0E001FF205 /* Project object */;
 }

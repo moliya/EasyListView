@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name          = "EasyListView"
-  s.version       = "1.2.2"
+  s.version       = "1.2.3"
   s.summary       = "快速搭建静态及可重用列表"
   s.homepage      = "https://github.com/moliya/EasyListView"
   s.license       = "MIT"
@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
   s.requires_arc  = true
   s.platform      = :ios, '9.0'
   s.swift_version = '5.0'
-
+  s.dependency 'EasyCompatible'
 end
