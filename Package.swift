@@ -12,7 +12,7 @@ let package = Package(
         .library(name: "EasyListView", targets: ["EasyListView"])
     ],
     dependencies: [
-        .package(url: "https://github.com/moliya/EasyCompatible.git", from: "1.0")
+        .package(url: "https://github.com/moliya/EasyCompatible.git", from: "1.0.0")
     ],
     targets: [
         .target(name: "EasyListView", dependencies: ["EasyCompatible"], path: "Sources")
