@@ -46,9 +46,9 @@
   ```swift
   //通过闭包方式添加一个UILabel
   scrollView.easy.appendView {
-    let label = UILabel()
-    label.text = "Title"
-    return label
+      let label = UILabel()
+      label.text = "Title"
+      return label
   }
   ```
 
@@ -64,9 +64,9 @@
   ```objective-c
   //通过Block方式添加一个UILabel
   [scrollView easy_appendViewBy:^UIView * _Nonnull{
-  	UILabel *label = [[UILabel alloc] init];
-  	label.text = @"Title";
-  	return label;
+      UILabel *label = [[UILabel alloc] init];
+      label.text = @"Title";
+      return label;
   }];
   ```
 
@@ -86,13 +86,13 @@
   
   //通过闭包方式在子视图label之后插入一个UITextField
   scrollView.easy.insertView({
-  	return UITextField()
+      return UITextField()
   }, after: label)
   //通过闭包方式在子视图image之后插入一个UILabel
   scrollView.easy.insertView({
-  	let label = UILabel()
-  	label.text = "Title"
-    return label
+      let label = UILabel()
+      label.text = "Title"
+      return label
   }, after: "image")
     ```
 
@@ -106,13 +106,13 @@
   
   //通过Block方式在子视图label之后插入一个UITextField
   [scrollView easy_insertViewBy:^UIView * _Nonnull{
-  	return [[UITextField alloc] init];
+      return [[UITextField alloc] init];
   } after:label];
   //通过Block方式在子视图image之后插入一个UILabel
   [scrollView easy_insertViewBy:^UIView * _Nonnull{
-  	UILabel *label = [[UILabel alloc] init];
-    label.text = @"Title";
-    return label;
+      UILabel *label = [[UILabel alloc] init];
+      label.text = @"Title";
+      return label;
   } after:@"image"];
   ```
 
@@ -128,13 +128,13 @@
   
   //在子视图label之前插入一个UITextField，使用闭包方式
   scrollView.easy.insertView({
-  	return UITextField()
+      return UITextField()
   }, before: label)
   //在子视图image之前插入一个UILabel，使用闭包方式
   scrollView.easy.insertView({
-  	let label = UILabel()
-  	label.text = "Title"
-    return label
+      let label = UILabel()
+      label.text = "Title"
+      return label
   }, before: "image")
   ```
 
@@ -148,13 +148,13 @@
   
   //通过Block方式在子视图label之前插入一个UITextField
   [scrollView easy_insertViewBy:^UIView * _Nonnull{
-  	return [[UITextField alloc] init];
+      return [[UITextField alloc] init];
   } before:label];
   //通过Block方式在子视图image之前插入一个UILabel
   [scrollView easy_insertViewBy:^UIView * _Nonnull{
-  	UILabel *label = [[UILabel alloc] init];
-    label.text = @"Title";
-    return label;
+      UILabel *label = [[UILabel alloc] init];
+      label.text = @"Title";
+      return label;
   } before:@"image"];
   ```
 
@@ -184,24 +184,24 @@
 
   ```swift
   scrollView.easy
-  	.appendView(UILabel())
-  	.identifier("Label")
-  	.insets(UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16))
-  	.clipsToBounds(true)
+      .appendView(UILabel())
+      .identifier("Label")
+      .insets(UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16))
+      .clipsToBounds(true)
   
   scrollView.easy
-  	.insertView(UIImageView(), after: "Label")
-  	.spacing(20)
-  	.clipsToBounds(false)
+      .insertView(UIImageView(), after: "Label")
+      .spacing(20)
+      .clipsToBounds(false)
   
   scrollView.easy.appendView {
-    return UILabel()
+      return UILabel()
   }
   .identifier("Label")
   .insets(UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16))
   
   scrollView.easy.insertView({
-  	return UIImageView()
+      return UIImageView()
   }, after: "Label")
   .spacing(20)
   .clipsToBounds(false)
@@ -220,13 +220,13 @@
   .clipsToBounds(NO);
   
   [scrollView easy_appendViewBy:^UIView * _Nonnull{
-  	return [[UILabel alloc] init];
+      return [[UILabel alloc] init];
   }]
   .identifier(@"Label")
   .insets(UIEdgeInsetsMake(10, 16, 0, 16));
   
   [scrollView easy_insertViewBy:^UIView * _Nonnull{
-  	return [[UIImageView alloc] init];
+      return [[UIImageView alloc] init];
   } after:@"Label"]
   .spacing(20)
   .clipsToBounds(NO);
@@ -285,8 +285,8 @@ scrollView.easy.deleteView("view4")
 
 //提交更新，beginUpdates和endUpdates必须成对使用
 scrollView.easy.endUpdates {
-	//完成回调
-	print("Update Finish")
+    //完成回调
+    print("Update Finish")
 }
 ```
 
@@ -304,8 +304,8 @@ scrollView.easy.endUpdates {
 
 //提交更新，beginUpdates和endUpdates必须成对使用
 [scrollView easy_endUpdatesWithCompletion:^{
-  //完成回调
-  NSLog(@"Update Finish");
+    //完成回调
+    NSLog(@"Update Finish");
 }];
 ```
 
@@ -319,9 +319,9 @@ scrollView.easy.endUpdates {
 //用disposableView包装子视图
 let view = scrollView.easy.disposableView {
     let label = UILabel()
-	  label.text = "PsyDuck"
+    label.text = "PsyDuck"
 
-  	return label
+    return label
 }
 //添加disposableView包装后的子视图
 scrollView.easy.appendView(view)
