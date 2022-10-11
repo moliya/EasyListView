@@ -3,19 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17164BD627EDB6950007A2A0 /* EasyCompatible in Frameworks */ = {isa = PBXBuildFile; productRef = 17164BD527EDB6950007A2A0 /* EasyCompatible */; };
 		171D6E9E24922D0E001FF205 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6E9D24922D0E001FF205 /* AppDelegate.swift */; };
 		171D6EA524922D0E001FF205 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171D6EA324922D0E001FF205 /* Main.storyboard */; };
 		171D6EA724922D12001FF205 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 171D6EA624922D12001FF205 /* Assets.xcassets */; };
 		171D6EAA24922D12001FF205 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171D6EA824922D12001FF205 /* LaunchScreen.storyboard */; };
-		171D6EB724922EAF001FF205 /* EasyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D6EB624922EAF001FF205 /* EasyListView.swift */; };
-		176D9E8624DE728A004972E9 /* EasyListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176D9E8524DE728A004972E9 /* EasyListCoordinator.swift */; };
-		176D9E8824DE731C004972E9 /* EasyListExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176D9E8724DE731C004972E9 /* EasyListExtension.swift */; };
-		177AFA9F24DC2216004A9E92 /* EasyListConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */; };
 		1782C95724EA2BF9008FE4CC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782C95624EA2BF9008FE4CC /* MainViewController.swift */; };
 		1782C96024EA56C8008FE4CC /* EasyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782C95F24EA56C8008FE4CC /* EasyListCell.swift */; };
 		1782C96224EA6335008FE4CC /* FormListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782C96124EA6335008FE4CC /* FormListController.swift */; };
@@ -50,8 +45,8 @@
 		1782C9AC24EB779D008FE4CC /* ESPullToRefresh+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782C9A224EB779C008FE4CC /* ESPullToRefresh+Manager.swift */; };
 		1782C9AD24EB779D008FE4CC /* ESRefreshAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782C9A324EB779C008FE4CC /* ESRefreshAnimator.swift */; };
 		1782C9AE24EB779D008FE4CC /* ESRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782C9A424EB779D008FE4CC /* ESRefreshComponent.swift */; };
-		1782C9B024EBA9BB008FE4CC /* EasyListObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1782C9AF24EBA9BB008FE4CC /* EasyListObjC.swift */; };
 		1782C9B324EBB0BB008FE4CC /* ObjCTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1782C9B224EBB0BB008FE4CC /* ObjCTestController.m */; };
+		7377F0024980E316A2D3F686 /* Pods_EasyListViewExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A819D9BD340487735560486 /* Pods_EasyListViewExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,11 +56,7 @@
 		171D6EA624922D12001FF205 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		171D6EA924922D12001FF205 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		171D6EAB24922D12001FF205 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		171D6EB624922EAF001FF205 /* EasyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListView.swift; path = Sources/EasyListView.swift; sourceTree = SOURCE_ROOT; };
-		176D9E8524DE728A004972E9 /* EasyListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListCoordinator.swift; path = Sources/EasyListCoordinator.swift; sourceTree = SOURCE_ROOT; };
-		176D9E8724DE731C004972E9 /* EasyListExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListExtension.swift; path = Sources/EasyListExtension.swift; sourceTree = SOURCE_ROOT; };
 		176D9E8924DE86A8004972E9 /* EasyListViewExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyListViewExample-Bridging-Header.h"; sourceTree = "<group>"; };
-		177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListConstraint.swift; path = Sources/EasyListConstraint.swift; sourceTree = SOURCE_ROOT; };
 		1782C95624EA2BF9008FE4CC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1782C95F24EA56C8008FE4CC /* EasyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyListCell.swift; sourceTree = "<group>"; };
 		1782C96124EA6335008FE4CC /* FormListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormListController.swift; sourceTree = "<group>"; };
@@ -102,9 +93,11 @@
 		1782C9A224EB779C008FE4CC /* ESPullToRefresh+Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ESPullToRefresh+Manager.swift"; sourceTree = "<group>"; };
 		1782C9A324EB779C008FE4CC /* ESRefreshAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESRefreshAnimator.swift; sourceTree = "<group>"; };
 		1782C9A424EB779D008FE4CC /* ESRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESRefreshComponent.swift; sourceTree = "<group>"; };
-		1782C9AF24EBA9BB008FE4CC /* EasyListObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasyListObjC.swift; path = Sources/EasyListObjC.swift; sourceTree = SOURCE_ROOT; };
 		1782C9B124EBB0BB008FE4CC /* ObjCTestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCTestController.h; sourceTree = "<group>"; };
 		1782C9B224EBB0BB008FE4CC /* ObjCTestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCTestController.m; sourceTree = "<group>"; };
+		2A819D9BD340487735560486 /* Pods_EasyListViewExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyListViewExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D7887A13346B92916E9F38C /* Pods-EasyListViewExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyListViewExample.release.xcconfig"; path = "Target Support Files/Pods-EasyListViewExample/Pods-EasyListViewExample.release.xcconfig"; sourceTree = "<group>"; };
+		75C361A72832AA3274877450 /* Pods-EasyListViewExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyListViewExample.debug.xcconfig"; path = "Target Support Files/Pods-EasyListViewExample/Pods-EasyListViewExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17164BD627EDB6950007A2A0 /* EasyCompatible in Frameworks */,
+				7377F0024980E316A2D3F686 /* Pods_EasyListViewExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +117,8 @@
 			children = (
 				171D6E9C24922D0E001FF205 /* EasyListViewExample */,
 				171D6E9B24922D0E001FF205 /* Products */,
+				8CA7CD663B621E5C9B20A29D /* Pods */,
+				ABDF0276DF1052BB1F8CECDA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,7 +133,6 @@
 		171D6E9C24922D0E001FF205 /* EasyListViewExample */ = {
 			isa = PBXGroup;
 			children = (
-				171D6EB224922E5C001FF205 /* Sources */,
 				1782C95524EA29FA008FE4CC /* Main */,
 				1782C95824EA2CE3008FE4CC /* Demo1 */,
 				1782C96324EA6AE9008FE4CC /* Demo2 */,
@@ -151,18 +145,6 @@
 				176D9E8924DE86A8004972E9 /* EasyListViewExample-Bridging-Header.h */,
 			);
 			path = EasyListViewExample;
-			sourceTree = "<group>";
-		};
-		171D6EB224922E5C001FF205 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				171D6EB624922EAF001FF205 /* EasyListView.swift */,
-				176D9E8524DE728A004972E9 /* EasyListCoordinator.swift */,
-				177AFA9E24DC2215004A9E92 /* EasyListConstraint.swift */,
-				176D9E8724DE731C004972E9 /* EasyListExtension.swift */,
-				1782C9AF24EBA9BB008FE4CC /* EasyListObjC.swift */,
-			);
-			name = Sources;
 			sourceTree = "<group>";
 		};
 		1782C95524EA29FA008FE4CC /* Main */ = {
@@ -253,6 +235,24 @@
 			path = Animator;
 			sourceTree = "<group>";
 		};
+		8CA7CD663B621E5C9B20A29D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				75C361A72832AA3274877450 /* Pods-EasyListViewExample.debug.xcconfig */,
+				2D7887A13346B92916E9F38C /* Pods-EasyListViewExample.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		ABDF0276DF1052BB1F8CECDA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A819D9BD340487735560486 /* Pods_EasyListViewExample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -260,18 +260,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 171D6EAE24922D12001FF205 /* Build configuration list for PBXNativeTarget "EasyListViewExample" */;
 			buildPhases = (
+				A99264109D60D80689605202 /* [CP] Check Pods Manifest.lock */,
 				171D6E9624922D0E001FF205 /* Sources */,
 				171D6E9724922D0E001FF205 /* Frameworks */,
 				171D6E9824922D0E001FF205 /* Resources */,
+				9C2933B5F86CA194B3A787F7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = EasyListViewExample;
-			packageProductDependencies = (
-				17164BD527EDB6950007A2A0 /* EasyCompatible */,
-			);
 			productName = EasyListViewExample;
 			productReference = 171D6E9A24922D0E001FF205 /* EasyListViewExample.app */;
 			productType = "com.apple.product-type.application";
@@ -303,9 +302,6 @@
 				"zh-Hant",
 			);
 			mainGroup = 171D6E9124922D0E001FF205;
-			packageReferences = (
-				17164BD427EDB6950007A2A0 /* XCRemoteSwiftPackageReference "EasyCompatible" */,
-			);
 			productRefGroup = 171D6E9B24922D0E001FF205 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -330,6 +326,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9C2933B5F86CA194B3A787F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EasyListViewExample/Pods-EasyListViewExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EasyListViewExample/Pods-EasyListViewExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EasyListViewExample/Pods-EasyListViewExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A99264109D60D80689605202 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EasyListViewExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		171D6E9624922D0E001FF205 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -340,11 +378,9 @@
 				1782C98524EB7445008FE4CC /* Stevia+Center.swift in Sources */,
 				1782C95724EA2BF9008FE4CC /* MainViewController.swift in Sources */,
 				1782C98424EB7445008FE4CC /* Stevia+Operators.swift in Sources */,
-				176D9E8824DE731C004972E9 /* EasyListExtension.swift in Sources */,
 				1782C9A924EB779D008FE4CC /* ESRefreshHeaderAnimator.swift in Sources */,
 				1782C98D24EB7445008FE4CC /* Stevia+Constraints.swift in Sources */,
 				1782C98624EB7445008FE4CC /* Stevia+Size.swift in Sources */,
-				1782C9B024EBA9BB008FE4CC /* EasyListObjC.swift in Sources */,
 				1782C99524EB7445008FE4CC /* Stevia+Percentage.swift in Sources */,
 				1782C96224EA6335008FE4CC /* FormListController.swift in Sources */,
 				1782C98924EB7445008FE4CC /* Stevia+Baselines.swift in Sources */,
@@ -355,7 +391,6 @@
 				1782C99024EB7445008FE4CC /* Stevia+GetConstraint.swift in Sources */,
 				1782C9A524EB779D008FE4CC /* ESRefreshProtocol.swift in Sources */,
 				1782C98724EB7445008FE4CC /* Stevia+LayoutAnchors.swift in Sources */,
-				177AFA9F24DC2216004A9E92 /* EasyListConstraint.swift in Sources */,
 				1782C98B24EB7445008FE4CC /* Stevia+Position.swift in Sources */,
 				1782C98F24EB7445008FE4CC /* Stevia+Hierarchy.swift in Sources */,
 				1782C98324EB7445008FE4CC /* Stevia+FlexibleMargin.swift in Sources */,
@@ -364,14 +399,12 @@
 				1782C9AD24EB779D008FE4CC /* ESRefreshAnimator.swift in Sources */,
 				1782C99324EB7445008FE4CC /* Stevia+DoubleDash.swift in Sources */,
 				171D6E9E24922D0E001FF205 /* AppDelegate.swift in Sources */,
-				176D9E8624DE728A004972E9 /* EasyListCoordinator.swift in Sources */,
 				1782C9AB24EB779D008FE4CC /* ESRefreshFooterAnimator.swift in Sources */,
 				1782C9AC24EB779D008FE4CC /* ESPullToRefresh+Manager.swift in Sources */,
 				1782C9AE24EB779D008FE4CC /* ESRefreshComponent.swift in Sources */,
 				1782C96D24EAA90E008FE4CC /* UserCell.swift in Sources */,
 				1782C98C24EB7445008FE4CC /* Stevia+Fill.swift in Sources */,
 				1782C99224EB7445008FE4CC /* Stevia+Style.swift in Sources */,
-				171D6EB724922EAF001FF205 /* EasyListView.swift in Sources */,
 				1782C98A24EB7445008FE4CC /* Stevia+Equation.swift in Sources */,
 				1782C9A724EB779D008FE4CC /* ES.swift in Sources */,
 			);
@@ -525,6 +558,7 @@
 		};
 		171D6EAF24922D12001FF205 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75C361A72832AA3274877450 /* Pods-EasyListViewExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -546,6 +580,7 @@
 		};
 		171D6EB024922D12001FF205 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D7887A13346B92916E9F38C /* Pods-EasyListViewExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -586,25 +621,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		17164BD427EDB6950007A2A0 /* XCRemoteSwiftPackageReference "EasyCompatible" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:moliya/EasyCompatible.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		17164BD527EDB6950007A2A0 /* EasyCompatible */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 17164BD427EDB6950007A2A0 /* XCRemoteSwiftPackageReference "EasyCompatible" */;
-			productName = EasyCompatible;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 171D6E9224922D0E001FF205 /* Project object */;
 }

@@ -1,0 +1,6 @@
+framework module EasyCompatible {
+  umbrella header "EasyCompatible-umbrella.h"
+
+  export *
+  module * { export * }
+}

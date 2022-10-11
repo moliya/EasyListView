@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EasyListView
 
 class MainViewController: UIViewController {
     
@@ -25,7 +26,7 @@ class MainViewController: UIViewController {
             
             return cell
         }()
-        scrollView.easy.append(cell1, spacing: 10)
+        scrollView.easy.appendView(cell1).spacing(10)
         
         let cell2: UIView = {
             let cell = EasyListCell()
@@ -37,6 +38,6 @@ class MainViewController: UIViewController {
             
             return cell
         }()
-        scrollView.easy.append(cell2, spacing: 0.5)
+        scrollView.easy.appendView(cell2).spacing(0.5)
     }
 }

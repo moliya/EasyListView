@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EasyListView
 
 class UserListController: UIViewController {
     
@@ -71,7 +72,7 @@ class UserListController: UIViewController {
                     
                     return cell
                 }
-                self.scrollView.easy.append(view)
+                self.scrollView.easy.appendView(view)
             }
             
             if self.scrollView.header?.isRefreshing == true {
@@ -96,7 +97,7 @@ class UserListController: UIViewController {
                     cell.set(name: self.users[index], avatar: UIImage(named: "avatar"))
                     return cell
                 }
-                self.scrollView.easy.append(view)
+                self.scrollView.easy.appendView(view)
             }
             
             self.scrollView.easy.endUpdates()

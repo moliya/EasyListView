@@ -30,80 +30,239 @@
 注意: EasyListView是通过约束实现自动布局的，支持高度自适应，请确保子视图添加了有效的约束（必要的高度约束或者intrinsicContentSize），以保证布局的正确性
 ```
 
-##### Append
+#### Append
 
-用于往列表中添加子视图，无动画效果
+用于往列表中添加子视图
 
-```swift
-//添加一个UILabel
-let label = UILabel()
-label.text = "Title"
-self.scrollView.easy.append(label)
-```
+- 使用Swift
 
-```swift
-//添加一个UILabel，与上一个视图间距16，并指定标识
-let label = UILabel()
-label.text = "Title"
-self.scrollView.easy.append(label, for: "titleLabel", spacing: 16)
-```
+  ```swift
+  //添加一个UILabel
+  let label = UILabel()
+  label.text = "Title"
+  scrollView.easy.appendView(label)
+  ```
 
-```swift
-//添加一个UILabel，并指定四边间距
-let label = UILabel()
-label.text = "Title"
-self.scrollView.easy.append(label, with: UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16))
-```
+  ```swift
+  //通过闭包方式添加一个UILabel
+  scrollView.easy.appendView {
+    let label = UILabel()
+    label.text = "Title"
+    return label
+  }
+  ```
 
-##### Insert
+- 使用Objective-C
 
-用于往列表中插入子视图，带动画效果
+  ```objective-c
+  //添加一个UILabel
+  UILabel *label = [[UILabel alloc] init];
+  label.text = @"Title";
+  [scrollView easy_appendView:label];
+  ```
+
+  ```objective-c
+  //通过Block方式添加一个UILabel
+  [scrollView easy_appendViewBy:^UIView * _Nonnull{
+  	UILabel *label = [[UILabel alloc] init];
+  	label.text = @"Title";
+  	return label;
+  }];
+  ```
+
+#### Insert
+
+用于往列表中插入子视图
 
 * 插入到某个视图对象之后，如果该对象有指定标识，可以传入String标识找到
 
-```swift
-//在子视图label之后插入一个UITextField
-let textField = UITextField()
-self.scrollView.easy.insert(textField, after: label)
-```
+  使用Swift
 
-```swift
-//在标识为"Title"的子视图之后插入一个UITextField
-let textField = UITextField()
-self.scrollView.easy.insert(textField, after: "Title")
-```
+    ```swift
+  //在子视图label之后插入一个UITextField
+  scrollView.easy.insertView(UITextField(), after: label)
+  //在子视图image之后插入一个UILabel
+  scrollView.easy.insertView(UILabel(), after: "image")
+  
+  //通过闭包方式在子视图label之后插入一个UITextField
+  scrollView.easy.insertView({
+  	return UITextField()
+  }, after: label)
+  //通过闭包方式在子视图image之后插入一个UILabel
+  scrollView.easy.insertView({
+  	let label = UILabel()
+  	label.text = "Title"
+    return label
+  }, after: "image")
+    ```
+
+  使用Objective-C
+
+  ```objective-c
+  //在子视图label之后插入一个UITextField
+  [scrollView easy_insertView:[[UITextField alloc] init] after:label];
+  //在子视图image之后插入一个UILabel
+  [scrollView easy_insertView:[[UILabel alloc] init] after:@"image"];
+  
+  //通过Block方式在子视图label之后插入一个UITextField
+  [scrollView easy_insertViewBy:^UIView * _Nonnull{
+  	return [[UITextField alloc] init];
+  } after:label];
+  //通过Block方式在子视图image之后插入一个UILabel
+  [scrollView easy_insertViewBy:^UIView * _Nonnull{
+  	UILabel *label = [[UILabel alloc] init];
+    label.text = @"Title";
+    return label;
+  } after:@"image"];
+  ```
 
 * 插入到某个视图对象之前
 
-```swift
-//在子视图label之前插入一个UITextField
-let textField = UITextField()
-self.scrollView.easy.insert(textField, before: label)
-```
+  使用Swift
 
-```swift
-//在自身UIScrollView之前插入一个UITextField，即在末尾插入子视图
-let textField = UITextField()
-self.scrollView.easy.insert(textField, before: self.scrollView)
-```
+  ```swift
+  //在子视图label之前插入一个UITextField
+  scrollView.easy.insertView(UITextField(), before: label)
+  //在子视图image之前插入一个UILabel
+  scrollView.easy.insertView(UILabel(), before: "image")
+  
+  //在子视图label之前插入一个UITextField，使用闭包方式
+  scrollView.easy.insertView({
+  	return UITextField()
+  }, before: label)
+  //在子视图image之前插入一个UILabel，使用闭包方式
+  scrollView.easy.insertView({
+  	let label = UILabel()
+  	label.text = "Title"
+    return label
+  }, before: "image")
+  ```
 
-##### Delete
+  使用Objective-C
+
+  ```objective-c
+  //在子视图label之前插入一个UITextField
+  [scrollView easy_insertView:[[UITextField alloc] init] before:label];
+  //在子视图image之前插入一个UILabel
+  [scrollView easy_insertView:[[UILabel alloc] init] before:@"image"];
+  
+  //通过Block方式在子视图label之前插入一个UITextField
+  [scrollView easy_insertViewBy:^UIView * _Nonnull{
+  	return [[UITextField alloc] init];
+  } before:label];
+  //通过Block方式在子视图image之前插入一个UILabel
+  [scrollView easy_insertViewBy:^UIView * _Nonnull{
+  	UILabel *label = [[UILabel alloc] init];
+    label.text = @"Title";
+    return label;
+  } before:@"image"];
+  ```
+
+#### Attributes
+
+`Append`和`Insert`的视图支持以下自定义属性
+
+1. identifier
+
+   设置唯一标识
+
+2. insets
+
+   设置内间距，默认为zero
+
+3. spacing
+
+   设置与上一元素的间距，默认为0
+
+4. clipsToBounds
+
+   设置超出部分是否裁剪，默认为true
+
+使用示例
+
+- 使用Swift
+
+  ```swift
+  scrollView.easy
+  	.appendView(UILabel())
+  	.identifier("Label")
+  	.insets(UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16))
+  	.clipsToBounds(true)
+  
+  scrollView.easy
+  	.insertView(UIImageView(), after: "Label")
+  	.spacing(20)
+  	.clipsToBounds(false)
+  
+  scrollView.easy.appendView {
+    return UILabel()
+  }
+  .identifier("Label")
+  .insets(UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16))
+  
+  scrollView.easy.insertView({
+  	return UIImageView()
+  }, after: "Label")
+  .spacing(20)
+  .clipsToBounds(false)
+  ```
+
+- 使用Objective-C
+
+  ```objective-c
+  [scrollView easy_appendView:[[UILabel alloc] init]]
+  .identifier(@"Label")
+  .insets(UIEdgeInsetsMake(10, 16, 0, 16))
+  .clipsToBounds(YES);
+  
+  [scrollView easy_insertView:[[UIImageView alloc] init] after:@"Label"]
+  .spacing(20)
+  .clipsToBounds(NO);
+  
+  [scrollView easy_appendViewBy:^UIView * _Nonnull{
+  	return [[UILabel alloc] init];
+  }]
+  .identifier(@"Label")
+  .insets(UIEdgeInsetsMake(10, 16, 0, 16));
+  
+  [scrollView easy_insertViewBy:^UIView * _Nonnull{
+  	return [[UIImageView alloc] init];
+  } after:@"Label"]
+  .spacing(20)
+  .clipsToBounds(NO);
+  ```
+
+  
+
+#### Delete
 
 删除指定视图对象，带动画效果
 
-```swift
-//删除label
-self.scrollView.easy.delete(label, completion: nil)
-```
+- 使用Swift
 
-```swift
-//删除所有子视图
-self.scrollView.easy.deleteAll()
-```
+  ```swift
+  //删除label
+  scrollView.easy.deleteView(label, completion: nil)
+  //删除image标识的视图
+  scrollView.easy.deleteView("image", completion: nil)
+  //删除所有子视图
+  scrollView.easy.deleteAll()
+  ```
 
-##### BatchUpdate
+- 使用Objective-C
 
-批量更新，带动画效果，更新操作包括append(添加)和delete(删除)
+  ```objective-c
+  //删除label
+  [scrollView easy_deleteView:label];
+  //删除image标识的视图
+  [scrollView easy_deleteView:@"image"];
+  //删除所有子视图
+  [scrollView easy_deleteAll];
+  ```
+
+#### BatchUpdate
+
+批量更新，带动画效果(可选)
 
 ```
 //开始更新
@@ -112,121 +271,128 @@ func beginUpdates(option: EasyListUpdateOption = .animatedLayout)
 func endUpdates(_ completion: (() -> Void)? = nil)
 ```
 
+使用Swift
+
 ```swift
 //执行更新前先调用beginUpdates
-self.scrollView.easy.beginUpdates()
+scrollView.easy.beginUpdates()
 
-//更新操作：添加view1，删除view2和标识为"view3"的视图
-self.scrollView.easy.append(view1)
-self.scrollView.easy.delete(view2)
-self.scrollView.easy.delete("view3")
+//更新操作：添加view1，在view1后面插入view2，删除view3和标识为"view4"的视图
+scrollView.easy.appendView(view1)
+scrollView.easy.insertView(view2, after: view1)
+scrollView.easy.deleteView(view3)
+scrollView.easy.deleteView("view4")
 
 //提交更新，beginUpdates和endUpdates必须成对使用
-self.scrollView.easy.endUpdates {
-    //完成回调
-    print("Update Finish")
+scrollView.easy.endUpdates {
+	//完成回调
+	print("Update Finish")
 }
 ```
 
-##### Disposable
+使用Objective-C
+
+```objective-c
+//执行更新前先调用beginUpdates
+[scrollView easy_beginUpdates];
+
+//更新操作：添加view1，在view1后面插入view2，删除view3和标识为"view4"的视图
+[scrollView easy_appendView:view1];
+[scrollView easy_insertView:view2 after:view1];
+[scrollView easy_deleteView:view3];
+[scrollView easy_deleteView:@"view4"];
+
+//提交更新，beginUpdates和endUpdates必须成对使用
+[scrollView easy_endUpdatesWithCompletion:^{
+  //完成回调
+  NSLog(@"Update Finish");
+}];
+```
+
+
+
+#### Disposable
 
 动态回收机制：当视图滚动到屏幕外，将会被销毁回收内存；当重新滚动到屏幕内，将会重新创建并展示，类似于`UITableView`的重用
 
 ```swift
 //用disposableView包装子视图
-let view = self.scrollView.easy.disposableView {
+let view = scrollView.easy.disposableView {
     let label = UILabel()
 	  label.text = "PsyDuck"
 
   	return label
 }
 //添加disposableView包装后的子视图
-self.scrollView.easy.append(view)
+scrollView.easy.appendView(view)
 ```
 
 ```swift
 //刷新数据
-self.scrollView.easy.reloadDisposableData()
+scrollView.easy.reloadDisposableData()
 ```
 
 ```swift
 //使用系统或自定义的UIScrollView时，需要在scrollViewDidScroll回调方法中调用triggerDisposable来触发回收机制
 //如果使用的是EasyListView对象，则无需调用
 func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    self.scrollView.easy.triggerDisposable()
+    scrollView.easy.triggerDisposable()
 }
 ```
 
-##### Getter
+#### Getter
 
 ```swift
 //获取指定标识的视图对象，包括静态视图和动态视图(处于屏幕外的动态视图可能返回nil)
-let label = self.scrollView.easy.getElement(identifier: "myLabel")
+let label = scrollView.easy.getElement(identifier: "myLabel")
 label?.text = "UpdateText"
 ```
 
 ```swift
 //获取指定下标的视图对象，仅限于动态视图
-let view = self.scrollView.easy.getDisposableElement(at: 1)
+let view = scrollView.easy.getDisposableElement(at: 1)
 ```
 
 ```swift
 //获取所有可见的动态子视图
-let views = self.scrollView.easy.visibleDisposableElements
+let views = scrollView.easy.visibleDisposableElements
 ```
 
-##### Other
+#### Other
 
 ```swift
 //设置全局的内边距
-self.scrollView.easy.coordinator.globalEdgeInsets = UIEdgeInsets(top: 20, left: 15, bottom: 20, right: 15)
+scrollView.easy.coordinator.globalEdgeInsets = UIEdgeInsets(top: 20, left: 15, bottom: 20, right: 15)
 ```
 
 ```swift
 //设置全局的间距
-self.scrollView.easy.coordinator.globalSpacing = 10
+scrollView.easy.coordinator.globalSpacing = 10
+```
+
+```swift
+//设置全局的超出部分是否裁剪
+scrollView.easy.coordinator.globalClipsToBounds = false
 ```
 
 ```swift
 //设置动画的持续时长
-self.scrollView.easy.coordinator.animationDuration = 1
-```
-
-##### For Objective-C
-
-提供了可供Objective-C调用的方法
-
-```swift
-//Objective-C请调用easy_前缀的方法
-@objc var easy_coordinator: EasyListCoordinator
-@objc func easy_appendView(_ view: ViewOrClosure)	
-@objc func easy_insertView(_ view: ViewOrClosure, after element: Any)
-@objc func easy_insertView(_ view: ViewOrClosure, before element: Any)
-@objc func easy_deleteElement(_ element: Any)
-@objc func easy_deleteAll()
-@objc func easy_beginUpdates()
-@objc func easy_endUpdates()
-@objc func easy_disposableView(maker: @escaping () -> UIView) -> UIView
-@objc func easy_reloadDisposableData()
-@objc func easy_triggerDisposable()
-@objc func easy_getElement(identifier: String) -> UIView?
-@objc func easy_getDisposableElementAtIndex(_ index: Int) -> UIView?
-@objc var easy_visibleDisposableElements: [UIView]
+scrollView.easy.coordinator.animationDuration = 1
 ```
 
 ### 集成
 
-##### CocoaPods
+#### CocoaPods
 
 ```ruby
 pod 'EasyListView'
 ```
 
-##### Swift Package Manager
+#### Swift Package Manager
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/moliya/EasyListView", from: "1.2.2")
+    .package(url: "https://github.com/moliya/EasyListView", from: "1.3.0")
 ]
 ```
 

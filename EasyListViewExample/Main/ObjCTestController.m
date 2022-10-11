@@ -7,7 +7,7 @@
 //
 
 #import "ObjCTestController.h"
-#import "EasyListViewExample-Swift.h"
+#import <EasyListView-Swift.h>
 
 @interface ObjCTestController ()
 
@@ -21,6 +21,7 @@
     EasyListView *listView = [[EasyListView alloc] init];
     [listView easy_beginUpdates];
     [listView easy_endUpdatesWithCompletion:nil];
+    
 }
 
 @end

@@ -32,7 +32,7 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     open var pullToRefreshDescription = NSLocalizedString("Pull to refresh", comment: "") {
         didSet {
             if pullToRefreshDescription != oldValue {
-                titleLabel.text = pullToRefreshDescription;
+                titleLabel.text = pullToRefreshDescription
             }
         }
     }

@@ -1,0 +1,892 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0FA2863A558AD78D8A97097AC9FCCAC3 /* EasyListAppendDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB3E8D42751D63D16E5ACED4E82E0D2 /* EasyListAppendDeprecated.swift */; };
+		17411C6D28F42AAA00B5A062 /* EasyListDeleteDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17411C6C28F42AAA00B5A062 /* EasyListDeleteDeprecated.swift */; };
+		17ACACC0376B5CD47345C9B0011B26AE /* EasyListObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73147B023A28EFD1FC94F7BFCA66F465 /* EasyListObjC.swift */; };
+		397820FAF75252EEDA61C15837D2BD2F /* EasyCompatible-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C60C75EC6F467D828687161D7DC55275 /* EasyCompatible-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EF181BD4F9D36244719893D56EB9B6D /* EasyListAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A849A0B4ADA2FBD77A8DE6BAAB3307CF /* EasyListAttributes.swift */; };
+		580C01C8B90466ED0BF5584957A8047E /* EasyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E42FEFA8C924FB6935E427383154EF8 /* EasyListView.swift */; };
+		5A0802CA3EE27D194452AECAC40E9214 /* EasyListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFEAA6AC9D0AFDCFDC93DAC5CCCFBCC /* EasyListCoordinator.swift */; };
+		5C7C0F684425C19D4D7E86A1177DF6AD /* EasyCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0430F87E305402EFAE2A8A4C9471A5 /* EasyCompatible.swift */; };
+		5E0EC6C11928235E98EA24947BE8C84B /* EasyListConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB870EF5E6EB31B18943F0821F1A82F /* EasyListConstraint.swift */; };
+		5F767BF2F404002B2C4B2A0A75D8D6FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		67E378D73F53EB5C4A8B9A29BC970F89 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		8B6BAFB81AF489707F7DB5A2AA6F3051 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		A94A70751AF61E0AA739BA290110092A /* EasyListObjCDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416EDBD62E0755546781C03B7860CDDF /* EasyListObjCDeprecated.swift */; };
+		AA3C6828E485A58A93E52418D1915630 /* EasyListAppend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E784486FB04AE932055287F32B01184 /* EasyListAppend.swift */; };
+		B52AEFFD16A78EC2FF6684EA1312607E /* EasyListView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C095D3E321BB651072C68F4A5762CC60 /* EasyListView-dummy.m */; };
+		C22F7FD6E05EC6895B2752A478F33E21 /* EasyListExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B48F0641D9C60E1B10A84062AF2A55 /* EasyListExtension.swift */; };
+		C9E4311192E54AB7354DB8100AB1B4F6 /* Pods-EasyListViewExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B264D2E22EF6B920AD175EEE6716631 /* Pods-EasyListViewExample-dummy.m */; };
+		CE5BA9255696976AD15BB916DE6F9740 /* Pods-EasyListViewExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF9FC8D859809A39070ADED10DF9BB9 /* Pods-EasyListViewExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D55F768A2B9A23627156126C949D5986 /* EasyListDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8661B95EB38CE735F557FFE16B13F011 /* EasyListDisposable.swift */; };
+		DF97D4A0989DDA2470FD5F23859F9229 /* EasyListDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1795D2806A751242D819B67BC4B3BE /* EasyListDelete.swift */; };
+		ED4E63541BDEB3C59330DBD18C108CA9 /* EasyCompatible-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F90D60DEFC96AE8426C64F336098A81 /* EasyCompatible-dummy.m */; };
+		F130EA94A1683AA2912B59A66A0CD96E /* EasyListInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CD48CD5DF5DC42B40934B4E929C0E0 /* EasyListInsert.swift */; };
+		F4C04535A58E9EDF3D0481B4BE52E710 /* EasyListInsertDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81ADED5DEB7DD854E0D394493FE1E57 /* EasyListInsertDeprecated.swift */; };
+		F9DE1A101BA450BD5D9A39A5D3A0ADCE /* EasyListView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 99D14C850F6AF2956FE64C172356CBD6 /* EasyListView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B10B0FDC2AA0BD659771D029B566916D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D0949614762ADA89669D857188A9171;
+			remoteInfo = EasyCompatible;
+		};
+		BCCAEBEA43A7A8C5B7C805698B715187 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D0949614762ADA89669D857188A9171;
+			remoteInfo = EasyCompatible;
+		};
+		BEF977E3A8A2F8E12EE5C1B586D7FD04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 158B7ADE69A453707A560D6EA60C90AF;
+			remoteInfo = EasyListView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		17411C6C28F42AAA00B5A062 /* EasyListDeleteDeprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyListDeleteDeprecated.swift; sourceTree = "<group>"; };
+		2AC0FFBACB20C3862AB405EFAEB1A8DC /* EasyListView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EasyListView-prefix.pch"; sourceTree = "<group>"; };
+		2E784486FB04AE932055287F32B01184 /* EasyListAppend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListAppend.swift; sourceTree = "<group>"; };
+		2F542C96399FF93278D0ED665AB6D12F /* EasyCompatible */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = EasyCompatible; path = EasyCompatible.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D7F3D2A8716D6B25B6347422DF1360A /* EasyListView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EasyListView.release.xcconfig; sourceTree = "<group>"; };
+		3DC53F189D48F0DB7E5286809164F099 /* Pods-EasyListViewExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EasyListViewExample-frameworks.sh"; sourceTree = "<group>"; };
+		416EDBD62E0755546781C03B7860CDDF /* EasyListObjCDeprecated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListObjCDeprecated.swift; sourceTree = "<group>"; };
+		4A334FEF8D9968BEEEC7A322398B20B8 /* EasyListView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "EasyListView-Info.plist"; sourceTree = "<group>"; };
+		4B264D2E22EF6B920AD175EEE6716631 /* Pods-EasyListViewExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EasyListViewExample-dummy.m"; sourceTree = "<group>"; };
+		54683439F744C3B37AC2D6DA550CC8DC /* Pods-EasyListViewExample-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EasyListViewExample-Info.plist"; sourceTree = "<group>"; };
+		57C29B96E09DC7886E502442E9A283F1 /* Pods-EasyListViewExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EasyListViewExample.debug.xcconfig"; sourceTree = "<group>"; };
+		5AB3E8D42751D63D16E5ACED4E82E0D2 /* EasyListAppendDeprecated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListAppendDeprecated.swift; sourceTree = "<group>"; };
+		5B1795D2806A751242D819B67BC4B3BE /* EasyListDelete.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListDelete.swift; sourceTree = "<group>"; };
+		5CF9FC8D859809A39070ADED10DF9BB9 /* Pods-EasyListViewExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EasyListViewExample-umbrella.h"; sourceTree = "<group>"; };
+		5D5D443D782B40187C4862ACB87A7D79 /* EasyCompatible.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EasyCompatible.release.xcconfig; sourceTree = "<group>"; };
+		5F90D60DEFC96AE8426C64F336098A81 /* EasyCompatible-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EasyCompatible-dummy.m"; sourceTree = "<group>"; };
+		6FD9AEEB09584CCD3BAFBA94AFBBC24E /* EasyListView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = EasyListView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		7204B0CB544C6B43C25AB0107A293CC7 /* EasyListView */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = EasyListView; path = EasyListView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7222FDDDBAA6AF1BB57420FFF4BEBC06 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		73147B023A28EFD1FC94F7BFCA66F465 /* EasyListObjC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListObjC.swift; sourceTree = "<group>"; };
+		73CD48CD5DF5DC42B40934B4E929C0E0 /* EasyListInsert.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListInsert.swift; sourceTree = "<group>"; };
+		8661B95EB38CE735F557FFE16B13F011 /* EasyListDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListDisposable.swift; sourceTree = "<group>"; };
+		86936228286AF97E784A8EAB27CF9D64 /* EasyCompatible-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EasyCompatible-prefix.pch"; sourceTree = "<group>"; };
+		8E42FEFA8C924FB6935E427383154EF8 /* EasyListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListView.swift; sourceTree = "<group>"; };
+		99D14C850F6AF2956FE64C172356CBD6 /* EasyListView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EasyListView-umbrella.h"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9EF82100FC6DF9D8E5EAE09F637E9800 /* EasyCompatible.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = EasyCompatible.modulemap; sourceTree = "<group>"; };
+		A849A0B4ADA2FBD77A8DE6BAAB3307CF /* EasyListAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListAttributes.swift; sourceTree = "<group>"; };
+		ACC53AA1CC0A5DFD4504E4475CE94396 /* EasyListView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EasyListView.debug.xcconfig; sourceTree = "<group>"; };
+		B07E80928679111B5466AD8E37F68344 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BA0430F87E305402EFAE2A8A4C9471A5 /* EasyCompatible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EasyCompatible.swift; path = Sources/EasyCompatible.swift; sourceTree = "<group>"; };
+		BD9293767642F89624FD20C601E54337 /* Pods-EasyListViewExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EasyListViewExample.release.xcconfig"; sourceTree = "<group>"; };
+		BE0B70180EBE80A97B39281C96688874 /* EasyCompatible.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EasyCompatible.debug.xcconfig; sourceTree = "<group>"; };
+		C095D3E321BB651072C68F4A5762CC60 /* EasyListView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EasyListView-dummy.m"; sourceTree = "<group>"; };
+		C60C75EC6F467D828687161D7DC55275 /* EasyCompatible-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EasyCompatible-umbrella.h"; sourceTree = "<group>"; };
+		C81ADED5DEB7DD854E0D394493FE1E57 /* EasyListInsertDeprecated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListInsertDeprecated.swift; sourceTree = "<group>"; };
+		C9F62C0279CFA6F8ABF3F770AF084432 /* Pods-EasyListViewExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EasyListViewExample-acknowledgements.markdown"; sourceTree = "<group>"; };
+		CEDFBE6E5D33A98697914EB2CAD707DA /* Pods-EasyListViewExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-EasyListViewExample.modulemap"; sourceTree = "<group>"; };
+		D3B48F0641D9C60E1B10A84062AF2A55 /* EasyListExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListExtension.swift; sourceTree = "<group>"; };
+		D792F934E4789FA2C4C651BFAF6878E5 /* EasyCompatible-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "EasyCompatible-Info.plist"; sourceTree = "<group>"; };
+		DDD4A2473CD1D8D57B1643134A6DFE1E /* EasyListView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = EasyListView.modulemap; sourceTree = "<group>"; };
+		E9DD3F279F16CC4F6F4EF6337353671D /* Pods-EasyListViewExample */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-EasyListViewExample"; path = Pods_EasyListViewExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECB870EF5E6EB31B18943F0821F1A82F /* EasyListConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListConstraint.swift; sourceTree = "<group>"; };
+		FA9FA2FF1FBF87EECACE649667A6E55C /* Pods-EasyListViewExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EasyListViewExample-acknowledgements.plist"; sourceTree = "<group>"; };
+		FDFEAA6AC9D0AFDCFDC93DAC5CCCFBCC /* EasyListCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EasyListCoordinator.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		16E2A5F2DC91502A90E8CA10D7EBBE2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F767BF2F404002B2C4B2A0A75D8D6FA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0F175B044399F75451CB2AECDB07B86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67E378D73F53EB5C4A8B9A29BC970F89 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D417A6A688E8C54ACBF41379740FB56C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B6BAFB81AF489707F7DB5A2AA6F3051 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1431546E49CA5E9CCF3B2B0542778F50 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A07A7A47E83B3EE631EFFDD29E355275 /* Pods-EasyListViewExample */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		2774AA0B451A43777D6FAF95F14ABD33 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A382D3DECE6B4A2A08B5A8F1E09F25FA /* EasyCompatible */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4E12714667057C6A79E4EB09E76A2406 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F542C96399FF93278D0ED665AB6D12F /* EasyCompatible */,
+				7204B0CB544C6B43C25AB0107A293CC7 /* EasyListView */,
+				E9DD3F279F16CC4F6F4EF6337353671D /* Pods-EasyListViewExample */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		57B0D095826F4AD8EB6CDC1523531C40 /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				73147B023A28EFD1FC94F7BFCA66F465 /* EasyListObjC.swift */,
+				416EDBD62E0755546781C03B7860CDDF /* EasyListObjCDeprecated.swift */,
+			);
+			name = ObjC;
+			path = Sources/ObjC;
+			sourceTree = "<group>";
+		};
+		6DCAF34C25863AAD4521043214B2D6F4 /* EasyListView */ = {
+			isa = PBXGroup;
+			children = (
+				57B0D095826F4AD8EB6CDC1523531C40 /* ObjC */,
+				D92AFDE3173E6488A3C9D1135EF0A590 /* Pod */,
+				FF908064ACAB4686B10807B096B97B4D /* Support Files */,
+				C94EF3D8BCE2AAC1E949FFA4118128EF /* Swift */,
+			);
+			name = EasyListView;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		A07A7A47E83B3EE631EFFDD29E355275 /* Pods-EasyListViewExample */ = {
+			isa = PBXGroup;
+			children = (
+				CEDFBE6E5D33A98697914EB2CAD707DA /* Pods-EasyListViewExample.modulemap */,
+				C9F62C0279CFA6F8ABF3F770AF084432 /* Pods-EasyListViewExample-acknowledgements.markdown */,
+				FA9FA2FF1FBF87EECACE649667A6E55C /* Pods-EasyListViewExample-acknowledgements.plist */,
+				4B264D2E22EF6B920AD175EEE6716631 /* Pods-EasyListViewExample-dummy.m */,
+				3DC53F189D48F0DB7E5286809164F099 /* Pods-EasyListViewExample-frameworks.sh */,
+				54683439F744C3B37AC2D6DA550CC8DC /* Pods-EasyListViewExample-Info.plist */,
+				5CF9FC8D859809A39070ADED10DF9BB9 /* Pods-EasyListViewExample-umbrella.h */,
+				57C29B96E09DC7886E502442E9A283F1 /* Pods-EasyListViewExample.debug.xcconfig */,
+				BD9293767642F89624FD20C601E54337 /* Pods-EasyListViewExample.release.xcconfig */,
+			);
+			name = "Pods-EasyListViewExample";
+			path = "Target Support Files/Pods-EasyListViewExample";
+			sourceTree = "<group>";
+		};
+		A382D3DECE6B4A2A08B5A8F1E09F25FA /* EasyCompatible */ = {
+			isa = PBXGroup;
+			children = (
+				BA0430F87E305402EFAE2A8A4C9471A5 /* EasyCompatible.swift */,
+				D190C0FDD4A86B98E6E09710B055D8FA /* Support Files */,
+			);
+			path = EasyCompatible;
+			sourceTree = "<group>";
+		};
+		C94EF3D8BCE2AAC1E949FFA4118128EF /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				2E784486FB04AE932055287F32B01184 /* EasyListAppend.swift */,
+				5AB3E8D42751D63D16E5ACED4E82E0D2 /* EasyListAppendDeprecated.swift */,
+				A849A0B4ADA2FBD77A8DE6BAAB3307CF /* EasyListAttributes.swift */,
+				ECB870EF5E6EB31B18943F0821F1A82F /* EasyListConstraint.swift */,
+				FDFEAA6AC9D0AFDCFDC93DAC5CCCFBCC /* EasyListCoordinator.swift */,
+				5B1795D2806A751242D819B67BC4B3BE /* EasyListDelete.swift */,
+				8661B95EB38CE735F557FFE16B13F011 /* EasyListDisposable.swift */,
+				D3B48F0641D9C60E1B10A84062AF2A55 /* EasyListExtension.swift */,
+				73CD48CD5DF5DC42B40934B4E929C0E0 /* EasyListInsert.swift */,
+				C81ADED5DEB7DD854E0D394493FE1E57 /* EasyListInsertDeprecated.swift */,
+				8E42FEFA8C924FB6935E427383154EF8 /* EasyListView.swift */,
+				17411C6C28F42AAA00B5A062 /* EasyListDeleteDeprecated.swift */,
+			);
+			name = Swift;
+			path = Sources/Swift;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				E03184A229EFDE04FC29B4243669B5A0 /* Development Pods */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				2774AA0B451A43777D6FAF95F14ABD33 /* Pods */,
+				4E12714667057C6A79E4EB09E76A2406 /* Products */,
+				1431546E49CA5E9CCF3B2B0542778F50 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D190C0FDD4A86B98E6E09710B055D8FA /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9EF82100FC6DF9D8E5EAE09F637E9800 /* EasyCompatible.modulemap */,
+				5F90D60DEFC96AE8426C64F336098A81 /* EasyCompatible-dummy.m */,
+				D792F934E4789FA2C4C651BFAF6878E5 /* EasyCompatible-Info.plist */,
+				86936228286AF97E784A8EAB27CF9D64 /* EasyCompatible-prefix.pch */,
+				C60C75EC6F467D828687161D7DC55275 /* EasyCompatible-umbrella.h */,
+				BE0B70180EBE80A97B39281C96688874 /* EasyCompatible.debug.xcconfig */,
+				5D5D443D782B40187C4862ACB87A7D79 /* EasyCompatible.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/EasyCompatible";
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D92AFDE3173E6488A3C9D1135EF0A590 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				6FD9AEEB09584CCD3BAFBA94AFBBC24E /* EasyListView.podspec */,
+				7222FDDDBAA6AF1BB57420FFF4BEBC06 /* LICENSE */,
+				B07E80928679111B5466AD8E37F68344 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		E03184A229EFDE04FC29B4243669B5A0 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6DCAF34C25863AAD4521043214B2D6F4 /* EasyListView */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		FF908064ACAB4686B10807B096B97B4D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				DDD4A2473CD1D8D57B1643134A6DFE1E /* EasyListView.modulemap */,
+				C095D3E321BB651072C68F4A5762CC60 /* EasyListView-dummy.m */,
+				4A334FEF8D9968BEEEC7A322398B20B8 /* EasyListView-Info.plist */,
+				2AC0FFBACB20C3862AB405EFAEB1A8DC /* EasyListView-prefix.pch */,
+				99D14C850F6AF2956FE64C172356CBD6 /* EasyListView-umbrella.h */,
+				ACC53AA1CC0A5DFD4504E4475CE94396 /* EasyListView.debug.xcconfig */,
+				3D7F3D2A8716D6B25B6347422DF1360A /* EasyListView.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Pods/Target Support Files/EasyListView";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2732A5FCDD599D1B13C315DF6DF829A7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9DE1A101BA450BD5D9A39A5D3A0ADCE /* EasyListView-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E0D0894A7A8AB5AB65C0DF4C095F9D82 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				397820FAF75252EEDA61C15837D2BD2F /* EasyCompatible-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4AED32EE0AF8EFF7BAF3E4B0C4DDEBF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE5BA9255696976AD15BB916DE6F9740 /* Pods-EasyListViewExample-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		158B7ADE69A453707A560D6EA60C90AF /* EasyListView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7CACE13254CAC0B16E06D6DC2CCF7B3 /* Build configuration list for PBXNativeTarget "EasyListView" */;
+			buildPhases = (
+				2732A5FCDD599D1B13C315DF6DF829A7 /* Headers */,
+				29DC8889A5DB7D9E687BC661F486D58D /* Sources */,
+				D417A6A688E8C54ACBF41379740FB56C /* Frameworks */,
+				C911F1D226C29BCD5844D5808B510564 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E92D04CBF1AB8E262B3F5F0A2B2D0270 /* PBXTargetDependency */,
+			);
+			name = EasyListView;
+			productName = EasyListView;
+			productReference = 7204B0CB544C6B43C25AB0107A293CC7 /* EasyListView */;
+			productType = "com.apple.product-type.framework";
+		};
+		6D0949614762ADA89669D857188A9171 /* EasyCompatible */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7494EB81BC1E7187586D48AD6A3E89AF /* Build configuration list for PBXNativeTarget "EasyCompatible" */;
+			buildPhases = (
+				E0D0894A7A8AB5AB65C0DF4C095F9D82 /* Headers */,
+				570DC3C2F3D5951411AE6DF93CD58416 /* Sources */,
+				16E2A5F2DC91502A90E8CA10D7EBBE2E /* Frameworks */,
+				2D043534B78AC0D6111D6D05EBE5BD30 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EasyCompatible;
+			productName = EasyCompatible;
+			productReference = 2F542C96399FF93278D0ED665AB6D12F /* EasyCompatible */;
+			productType = "com.apple.product-type.framework";
+		};
+		C3E606294D7FDE9AD7ACA587FBD3DBF5 /* Pods-EasyListViewExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EE703A1C141ED198C307BE833DF5DDF /* Build configuration list for PBXNativeTarget "Pods-EasyListViewExample" */;
+			buildPhases = (
+				F4AED32EE0AF8EFF7BAF3E4B0C4DDEBF /* Headers */,
+				987BFB08FF2E34830C1E324CD0A3A04D /* Sources */,
+				C0F175B044399F75451CB2AECDB07B86 /* Frameworks */,
+				89E3AC348C984392E24BACA30EA22489 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E9CF33FC073F27E89ED1A6D137907FCA /* PBXTargetDependency */,
+				525D44F6AB1258AAB497B30D72B8161F /* PBXTargetDependency */,
+			);
+			name = "Pods-EasyListViewExample";
+			productName = Pods_EasyListViewExample;
+			productReference = E9DD3F279F16CC4F6F4EF6337353671D /* Pods-EasyListViewExample */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 4E12714667057C6A79E4EB09E76A2406 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D0949614762ADA89669D857188A9171 /* EasyCompatible */,
+				158B7ADE69A453707A560D6EA60C90AF /* EasyListView */,
+				C3E606294D7FDE9AD7ACA587FBD3DBF5 /* Pods-EasyListViewExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2D043534B78AC0D6111D6D05EBE5BD30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89E3AC348C984392E24BACA30EA22489 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C911F1D226C29BCD5844D5808B510564 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		29DC8889A5DB7D9E687BC661F486D58D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA3C6828E485A58A93E52418D1915630 /* EasyListAppend.swift in Sources */,
+				0FA2863A558AD78D8A97097AC9FCCAC3 /* EasyListAppendDeprecated.swift in Sources */,
+				4EF181BD4F9D36244719893D56EB9B6D /* EasyListAttributes.swift in Sources */,
+				17411C6D28F42AAA00B5A062 /* EasyListDeleteDeprecated.swift in Sources */,
+				5E0EC6C11928235E98EA24947BE8C84B /* EasyListConstraint.swift in Sources */,
+				5A0802CA3EE27D194452AECAC40E9214 /* EasyListCoordinator.swift in Sources */,
+				DF97D4A0989DDA2470FD5F23859F9229 /* EasyListDelete.swift in Sources */,
+				D55F768A2B9A23627156126C949D5986 /* EasyListDisposable.swift in Sources */,
+				C22F7FD6E05EC6895B2752A478F33E21 /* EasyListExtension.swift in Sources */,
+				F130EA94A1683AA2912B59A66A0CD96E /* EasyListInsert.swift in Sources */,
+				F4C04535A58E9EDF3D0481B4BE52E710 /* EasyListInsertDeprecated.swift in Sources */,
+				17ACACC0376B5CD47345C9B0011B26AE /* EasyListObjC.swift in Sources */,
+				A94A70751AF61E0AA739BA290110092A /* EasyListObjCDeprecated.swift in Sources */,
+				580C01C8B90466ED0BF5584957A8047E /* EasyListView.swift in Sources */,
+				B52AEFFD16A78EC2FF6684EA1312607E /* EasyListView-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		570DC3C2F3D5951411AE6DF93CD58416 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C7C0F684425C19D4D7E86A1177DF6AD /* EasyCompatible.swift in Sources */,
+				ED4E63541BDEB3C59330DBD18C108CA9 /* EasyCompatible-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		987BFB08FF2E34830C1E324CD0A3A04D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9E4311192E54AB7354DB8100AB1B4F6 /* Pods-EasyListViewExample-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		525D44F6AB1258AAB497B30D72B8161F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EasyListView;
+			target = 158B7ADE69A453707A560D6EA60C90AF /* EasyListView */;
+			targetProxy = BEF977E3A8A2F8E12EE5C1B586D7FD04 /* PBXContainerItemProxy */;
+		};
+		E92D04CBF1AB8E262B3F5F0A2B2D0270 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EasyCompatible;
+			target = 6D0949614762ADA89669D857188A9171 /* EasyCompatible */;
+			targetProxy = BCCAEBEA43A7A8C5B7C805698B715187 /* PBXContainerItemProxy */;
+		};
+		E9CF33FC073F27E89ED1A6D137907FCA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EasyCompatible;
+			target = 6D0949614762ADA89669D857188A9171 /* EasyCompatible */;
+			targetProxy = B10B0FDC2AA0BD659771D029B566916D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		07560150D45B13A90167AF8A467C0901 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD9293767642F89624FD20C601E54337 /* Pods-EasyListViewExample.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-EasyListViewExample/Pods-EasyListViewExample-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-EasyListViewExample/Pods-EasyListViewExample.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		13DB69AB6B7383AA0A7ECEEF3391298C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACC53AA1CC0A5DFD4504E4475CE94396 /* EasyListView.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/EasyListView/EasyListView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/EasyListView/EasyListView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/EasyListView/EasyListView.modulemap";
+				PRODUCT_MODULE_NAME = EasyListView;
+				PRODUCT_NAME = EasyListView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		15BCAAE6BBE846D043F2CB6F6144F14D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D5D443D782B40187C4862ACB87A7D79 /* EasyCompatible.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/EasyCompatible/EasyCompatible-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/EasyCompatible/EasyCompatible-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/EasyCompatible/EasyCompatible.modulemap";
+				PRODUCT_MODULE_NAME = EasyCompatible;
+				PRODUCT_NAME = EasyCompatible;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		B55BE61A94ABCB0F5127F28C42A86EDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D7F3D2A8716D6B25B6347422DF1360A /* EasyListView.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/EasyListView/EasyListView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/EasyListView/EasyListView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/EasyListView/EasyListView.modulemap";
+				PRODUCT_MODULE_NAME = EasyListView;
+				PRODUCT_NAME = EasyListView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BC752B815B5ECC54367F0B2BBFA2B62B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57C29B96E09DC7886E502442E9A283F1 /* Pods-EasyListViewExample.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-EasyListViewExample/Pods-EasyListViewExample-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-EasyListViewExample/Pods-EasyListViewExample.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CA547D2C7E9A8A153DC2B27FBE00B112 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		EDAB50B88C26539E4A8EED3847625034 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE0B70180EBE80A97B39281C96688874 /* EasyCompatible.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/EasyCompatible/EasyCompatible-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/EasyCompatible/EasyCompatible-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/EasyCompatible/EasyCompatible.modulemap";
+				PRODUCT_MODULE_NAME = EasyCompatible;
+				PRODUCT_NAME = EasyCompatible;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */,
+				CA547D2C7E9A8A153DC2B27FBE00B112 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7494EB81BC1E7187586D48AD6A3E89AF /* Build configuration list for PBXNativeTarget "EasyCompatible" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDAB50B88C26539E4A8EED3847625034 /* Debug */,
+				15BCAAE6BBE846D043F2CB6F6144F14D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7EE703A1C141ED198C307BE833DF5DDF /* Build configuration list for PBXNativeTarget "Pods-EasyListViewExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC752B815B5ECC54367F0B2BBFA2B62B /* Debug */,
+				07560150D45B13A90167AF8A467C0901 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B7CACE13254CAC0B16E06D6DC2CCF7B3 /* Build configuration list for PBXNativeTarget "EasyListView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13DB69AB6B7383AA0A7ECEEF3391298C /* Debug */,
+				B55BE61A94ABCB0F5127F28C42A86EDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

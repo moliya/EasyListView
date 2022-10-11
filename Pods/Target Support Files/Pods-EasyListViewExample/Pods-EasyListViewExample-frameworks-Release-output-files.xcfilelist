@@ -1,0 +1,2 @@
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyCompatible.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyListView.framework

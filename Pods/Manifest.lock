@@ -1,0 +1,23 @@
+PODS:
+  - EasyCompatible (1.0)
+  - EasyListView (1.3.0):
+    - EasyCompatible
+
+DEPENDENCIES:
+  - EasyListView (from `./`)
+
+SPEC REPOS:
+  trunk:
+    - EasyCompatible
+
+EXTERNAL SOURCES:
+  EasyListView:
+    :path: "./"
+
+SPEC CHECKSUMS:
+  EasyCompatible: 571e10cf69d018b820f65cd6b99f76573313db6e
+  EasyListView: ac1b3dcd19ef3fb5b2ea48b74b91a8171cc723e8
+
+PODFILE CHECKSUM: 85d9c6237193f3c7e89929aa9b3c1282aad65d38
+
+COCOAPODS: 1.11.3

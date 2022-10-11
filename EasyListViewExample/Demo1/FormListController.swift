@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EasyListView
 
 class FormListController: UIViewController {
     
@@ -37,17 +38,17 @@ class FormListController: UIViewController {
             view.backgroundColor = #colorLiteral(red: 0.8979505897, green: 0.8981012702, blue: 0.8979307413, alpha: 1)
             view.height(0.5)
             
-            self.scrollView.easy.append(view)
+            self.scrollView.easy.appendView(view)
         }
         
-        scrollView.easy.append({
+        scrollView.easy.appendView {
             let label = UILabel()
             label.numberOfLines = 0
             label.font = .systemFont(ofSize: 14)
             label.textColor = .lightGray
             label.text = "Section Title"
             return label
-        }(), with: UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16))
+        }.insets(UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16))
         
         let nameCell: UIView = {
             let cell = EasyListCell()
@@ -70,7 +71,7 @@ class FormListController: UIViewController {
             
             return cell
         }()
-        scrollView.easy.append(nameCell, spacing: 10)
+        scrollView.easy.appendView(nameCell).spacing(10)
         
         addSeparator()
         
@@ -94,7 +95,7 @@ class FormListController: UIViewController {
             
             return cell
         }()
-        scrollView.easy.append(emailCell)
+        scrollView.easy.appendView(emailCell)
         
         addSeparator()
         
@@ -122,7 +123,7 @@ class FormListController: UIViewController {
             
             return cell
         }()
-        scrollView.easy.append(birthdayCell, for: "birthday", spacing: 0)
+        scrollView.easy.appendView(birthdayCell).identifier("birthday")
         
         addSeparator()
         
@@ -141,16 +142,16 @@ class FormListController: UIViewController {
             
             return cell
         }()
-        scrollView.easy.append(switchCell)
+        scrollView.easy.appendView(switchCell)
         
-        scrollView.easy.append({
+        scrollView.easy.appendView {
             let label = UILabel()
             label.numberOfLines = 0
             label.font = .systemFont(ofSize: 16)
             label.textColor = .lightGray
             label.text = "1.AAA\n2.BBB\n3.CCC"
             return label
-        }(), with: UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16))
+        }.insets(UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16))
         
         let inputView: UIView = {
             let view = UIView()
@@ -178,7 +179,7 @@ class FormListController: UIViewController {
             
             return view
         }()
-        scrollView.easy.append(inputView, spacing: 10)
+        scrollView.easy.appendView(inputView).spacing(10)
         
         let button = UIButton(type: .custom)
         button.setTitle("Done", for: .normal)
@@ -187,7 +188,7 @@ class FormListController: UIViewController {
         button.clipsToBounds = true
         button.height(45)
         button.addTarget(self, action: #selector(tapDone), for: .touchUpInside)
-        scrollView.easy.append(button, with: UIEdgeInsets(top: 40, left: 16, bottom: 20, right: 16))
+        scrollView.easy.appendView(button).insets(UIEdgeInsets(top: 40, left: 16, bottom: 20, right: 16))
     }
     
     deinit {
@@ -196,7 +197,7 @@ class FormListController: UIViewController {
     
     func tapBirthdayCell() {
         if let _ = scrollView.easy.getElement(identifier: "birthdaySelector") as? UIDatePicker {
-            scrollView.easy.delete("birthdaySelector")
+            scrollView.easy.deleteView("birthdaySelector")
             birthdayLabel.textColor = #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1)
             return
         }
@@ -216,7 +217,9 @@ class FormListController: UIViewController {
         }
         birthdayLabel.textColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
         
-        scrollView.easy.insert(picker, after: "birthday", with: .zero, for: "birthdaySelector", completion: nil)
+        scrollView.easy.beginUpdates()
+        scrollView.easy.insertView(picker, after: "birthday").identifier("birthdaySelector")
+        scrollView.easy.endUpdates()
     }
     
     @objc func datePickerChanged(_ sender: UIDatePicker) {
