@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(KFEasyListUpdateOption)
+@objc(EasyListUpdateOption)
 public enum EasyListUpdateOption: Int {
     case animatedLayout = 0 //带动画的布局更新
     case onlyLayout //无动画的布局更新
